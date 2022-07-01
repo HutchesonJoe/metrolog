@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 2022_06_29_194810) do
   create_table "tenant_complaints", force: :cascade do |t|
     t.integer "tenant_id"
     t.integer "complaint_id"
+    t.integer "building_id"
     t.boolean "resolved"
     t.string "tenant_notes"
     t.string "super_notes"

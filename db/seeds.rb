@@ -37,9 +37,9 @@ cindys_apartment = Apartment.create(building_id: westside1.id, unit_number: "14A
 dans_apartment = Apartment.create(building_id: westside2.id, unit_number: "4C", tenant_id: dan.id)
 
 #tenant_complaints
-mold_complaint = TenantComplaint.create(tenant_id: joe.id, complaint_id: mold.id, resolved: false, tenant_notes: "Black mold under kitchen sink.")
-hot_water_complaint = TenantComplaint.create(tenant_id: fee.id, complaint_id: hot_water.id, resolved: false, tenant_notes: "No hot water at night, after 6pm.")
-noise_complaint = TenantComplaint.create(tenant_id: cindy.id, complaint_id: noise.id, resolved: false, tenant_notes: "Loud kids in the hallway.")
-pests = TenantComplaint.create(tenant_id: dan.id, complaint_id: pests.id, resolved: false, tenant_notes: "Aggresive cockroach infestation.", super_notes: "Exterminator scheduled")
+mold_complaint = TenantComplaint.create(tenant_id: joe.id, building_id: eastside.id, complaint_id: mold.id, resolved: false, tenant_notes: "Black mold under kitchen sink.")
+hot_water_complaint = TenantComplaint.create(tenant_id: fee.id, building_id: riverside.id, complaint_id: hot_water.id, resolved: false, tenant_notes: "No hot water at night, after 6pm.")
+noise_complaint = TenantComplaint.create(tenant_id: cindy.id, building_id: westside1.id, complaint_id: noise.id, resolved: false, tenant_notes: "Loud kids in the hallway.")
+pests = TenantComplaint.create(tenant_id: dan.id, building_id: westside2.id, complaint_id: pests.id, resolved: false, tenant_notes: "Aggresive cockroach infestation.", super_notes: "Exterminator scheduled")
 
 puts "Metro seeded!"
