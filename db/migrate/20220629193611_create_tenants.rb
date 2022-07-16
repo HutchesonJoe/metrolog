@@ -7,6 +7,7 @@ class CreateTenants < ActiveRecord::Migration[6.1]
       t.string :phone_number
       t.string :additional_tenants
       t.boolean :currently_occupying
+      t.string :username
       t.string :password_digest
       t.timestamps
     end

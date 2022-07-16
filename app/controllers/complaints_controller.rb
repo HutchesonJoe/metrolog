@@ -4,5 +4,5 @@ class ComplaintsController < ApplicationController
     complaints = Complaint.all
     render json: complaints
   end
-  
+
 end

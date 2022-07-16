@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 2022_06_29_194810) do
     t.string "last_name"
     t.string "email"
     t.string "phone_number"
+    t.string "username"
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -54,6 +55,7 @@ ActiveRecord::Schema.define(version: 2022_06_29_194810) do
     t.boolean "resolved"
     t.string "tenant_notes"
     t.string "super_notes"
+    t.string "unit"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -65,6 +67,7 @@ ActiveRecord::Schema.define(version: 2022_06_29_194810) do
     t.string "phone_number"
     t.string "additional_tenants"
     t.boolean "currently_occupying"
+    t.string "username"
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

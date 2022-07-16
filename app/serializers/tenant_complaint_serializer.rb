@@ -1,5 +1,7 @@
 class TenantComplaintSerializer < ActiveModel::Serializer
-  attributes :id, :tenant_id, :complaint_id, :building_id, :resolved, :super_notes, :tenant_notes, :created_at, :updated_at
+  attributes :id, :resolved, :super_notes, :tenant_notes, :created_at, :updated_at, :complaint_id, :tenant_id, :building_id, :unit
   
   belongs_to :complaint
+  belongs_to :tenant
+  belongs_to :building
 end

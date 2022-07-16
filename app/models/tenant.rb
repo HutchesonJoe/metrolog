@@ -3,4 +3,5 @@ class Tenant < ApplicationRecord
   has_one :apartment
   has_many :tenant_complaints
   has_many :complaints, through: :tenant_complaints
+  has_one :building, through: :apartment
 end

@@ -7,6 +7,7 @@ class CreateTenantComplaints < ActiveRecord::Migration[6.1]
       t.boolean :resolved
       t.string :tenant_notes
       t.string :super_notes
+      t.string :unit
 
       t.timestamps
     end
