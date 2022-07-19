@@ -6,7 +6,7 @@ function BuildingsProvider({children}){
   const [buildings, setBuildings] = useState([])
 
   useEffect(()=>{
-    fetch("./buildings")
+    fetch("/buildings")
     .then(r=>r.json())
     .then(data=>setBuildings(data))
 

@@ -5,8 +5,12 @@ Rails.application.routes.draw do
     resources :complaints, only: [:index]
     resources :apartments, only: [:index, :create]
     resources :buildings, only: [:index]
-    resources :tenant_complaints, only: [:index]
+    #full crud??
+    resources :tenant_complaints, only: [:index, :show, :update, :create, :destroy]
 
+    get "/by-date", to: "tenant_complaints#order_by_date"
+    get "/open-complaints", to: "tenant_complaints#get_open"
+    get "/closed-complaints", to: "tenant_complaints#get_closed"
     post "/login", to: "sessions#create"
     delete "/logout", to: "sessions#destroy"
     get "/me", to: "sessions#show"

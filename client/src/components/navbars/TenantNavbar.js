@@ -1,10 +1,14 @@
 import {Routes, Route, NavLink} from "react-router-dom";
+// import { useContext } from "react";
+// import { UserContext } from "../UserContext";
 import LogOut from "../LogOut";
 import MyComplaints from "../tenant/MyComplaints";
 import FileComplaint from "../tenant/FileComplaint";
 import BuildingComplaints from '../tenant/BuildingComplaints';
 
-function TenantNavbar({user}){
+function TenantNavbar(){
+
+
   return(
     <div>
       <div id="navbar">

@@ -1,32 +1,52 @@
 import { useEffect, useState, useContext } from "react";
 import { ComplaintTypesContext } from "../ComplaintTypesInfo"
-import { BuildingsContext } from "../BuildingsInfo"
 import ComplaintCard from "../Cards/ComplaintCard";
+import { UserContext } from "../UserContext";
+import { BuildingsContext } from "../BuildingsInfo"
 
-function AllSuperComplaints({user}){
-  const [complaints, setComplaints] = useState([])
-  const complaintTypes = useContext(ComplaintTypesContext)
-  const buildings = user.buildings
-  const allComplaints = buildings.map((building)=>building.tenant_complaints)
-  
+function AllSuperComplaints({complaints, setComplaints}){
+  const user = useContext(UserContext)
+  const buildings = useContext(BuildingsContext)
+  const superBuildings = user.buildings
+  const [typeId, setTypeId] = useState()
+  const[allComplaints, setAllComplaints] = useState([])
+
   useEffect(()=>{
-    setComplaints(allComplaints.flat())
-  },[])
+    if(superBuildings!==undefined){
+      const complaints = superBuildings.map((building)=>building.tenant_complaints);
+      setComplaints(complaints.flat());
+      setAllComplaints(complaints.flat())
+    }
+  },[buildings])
+  
+  // const allComplaints = buildings.map((building)=>building.complaints).flat()
+  // setComplaints(allComplaints)
+  const complaintTypes = useContext(ComplaintTypesContext)
+  
+  // useEffect(()=>{
+  //   setComplaints(allComplaints)
+  // },[])
   
   let complaintList
 
   if(complaints){
-    complaintList = complaints.map((complaint)=><ComplaintCard tenantComplaint={complaint} key={complaint.id}/>)
+    let filteredComplaints = complaints
+    if(typeId){
+      filteredComplaints = complaints.filter((complaint)=>complaint.complaint_id===parseInt(typeId))
+    }
+    complaintList = filteredComplaints.map((complaint)=><ComplaintCard tenantComplaint={complaint} key={complaint.id}/>)
   }
 
   function selectType(e){
-    setComplaints(allComplaints.flat())
-    const filteredComplaints = complaints.filter((complaint)=>complaint.complaint_id===parseInt(e.target.value))
-    setComplaints(filteredComplaints)
+    setTypeId(parseInt(e.target.value))
+    const filteredComplaints = allComplaints.filter((complaint)=>complaint.complaint_id===typeId)
+    // if(e.target.value==)
+    // setType(e.target.value)
+    // const filteredComplaints = complaints.filter((complaint)=>complaint.complaint_id===parseInt(e.target.value))
+    // setComplaints(filteredComplaints)
   }
 
   const complaintTypesOptions = complaintTypes.map((type)=><option key = {type.id} value={type.id}>{type.complaint_type}</option>)
-
   return(
     <div>
       <div>

@@ -6,7 +6,7 @@ function ComplaintTypesProvider({children}){
   const [complaints, setComplaints] = useState([])
   
   useEffect(()=>{
-    fetch("./complaints")
+    fetch("/complaints")
     .then(r=>r.json())
     .then(data=>setComplaints(data))
 

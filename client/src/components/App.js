@@ -4,7 +4,8 @@
 import Banner from './Banner';
 import Home from './homepage/Home';
 import { BuildingsProvider } from "./BuildingsInfo";
-import { ComplaintTypesProvider } from "./ComplaintTypesInfo"
+import { ComplaintTypesProvider } from "./ComplaintTypesInfo";
+import { UserProvider } from "./UserContext"
 
 function App() {
 
@@ -14,12 +15,14 @@ function App() {
       <Banner/>
       
       <div>
-        
-          <BuildingsProvider>
-          <ComplaintTypesProvider>
-            <Home/>
-          </ComplaintTypesProvider>
-          </BuildingsProvider>
+          <UserProvider>
+            <BuildingsProvider>
+              <ComplaintTypesProvider>
+                <Home/>
+              </ComplaintTypesProvider>
+            </BuildingsProvider>
+          </UserProvider>
+          
         
       </div>
       
