@@ -5,7 +5,7 @@ class Tenant < ApplicationRecord
   validates :last_name, presence: true
   validates :username, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true
-  validates :apartment, presence: true
+  # validates :apartment, presence: true
 
   has_one :apartment
   has_many :tenant_complaints

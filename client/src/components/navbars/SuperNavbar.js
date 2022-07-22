@@ -20,10 +20,7 @@ function SuperNavbar(){
         <NavLink to="/complaintsbydate" className="navlink" complaints={complaints}>By Date</NavLink>
       </div>
       <Routes>
-        <Route path="/allcomplaints" element={<AllSuperComplaints complaints={complaints} setComplaints={setComplaints}/>}/>
-        <Route path="/super/complaintsbybuilding" element={<SuperComplaintsByBuilding />}/>
-        {/* this route needs attention...where is it getting'user? */}
-        <Route path="/complaintsbydate" element={<ComplaintsByDate/>}/>
+        
       </Routes>
     </div>
   )

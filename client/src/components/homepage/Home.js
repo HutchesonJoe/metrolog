@@ -3,21 +3,26 @@ import { NavLink, Routes, Route } from "react-router-dom"
 import Login from "./Login";
 import Register from "./Register";
 import ComplaintsByBuilding from "../ComplaintsByBuilding";
-import TenantInfo from "../Cards/TenantCard";
-import SuperInfo from "../Cards/SuperCard";
-import { BuildingsContext } from "../BuildingsInfo";
+import TenantCard from "../Cards/TenantCard";
+import SuperCard from "../Cards/SuperCard";
+import { TenantComplaintContext } from "../TenantComplaintsContext";
 import TenantNavbar from "../navbars/TenantNavbar";
 import SuperNavbar from "../navbars/SuperNavbar";
 import { UserContext } from "../UserContext";
-
+import AllSuperComplaints from "../super/AllSuperComplaints";
+import SuperComplaintsByBuilding from "../super/SuperComplaintsByBuilding";
+import ComplaintsByDate from "../super/ComplaintsByDate";
+import BuildingComplaints from "../tenant/BuildingComplaints";
+import MyComplaints from "../tenant/MyComplaints";
+import FileComplaint from "../tenant/FileComplaint";
 
 function Home(){
-//  const[user, setUser] = useState()
 
 const [user, setUser] = useContext(UserContext)
-console.log(user, setUser)
+const [complaints, setComplaints] = useContext(TenantComplaintContext)
+const [isSuper, setIsSuper] = useState()
+console.log(user)
   useEffect(()=>{
-    
     fetch("/me").then((r)=>{
       if (r.ok){
         r.json().then((user)=>setUser(user))
@@ -25,17 +30,26 @@ console.log(user, setUser)
     })
   },[])
   
-
-  
   
   let userInfo
 
-  if(user && user.apartment){
-    userInfo = <TenantInfo user={user}/>
-  } else if(user && user.buildings){
-    
-    userInfo = <SuperInfo user={user}/>
-  }
+  useEffect(()=>{
+    if(user && user.buildings){
+      setIsSuper(true)
+    } else {
+      setIsSuper(false)
+    }
+  // if(user && user.apartment){
+  //   userInfo = <TenantCard/>
+  //   setComplaints(user.building.tenant_complaints)
+  // } else if(user && user.buildings){
+  //   userInfo = <SuperCard/>
+  //   const superComplaints = user.buildings.map((building)=>building.tenant_complaints).flat()
+  //   setComplaints(superComplaints)
+  // }
+}
+  ,[user])
+  
 
   function handleLogout(){
     fetch("/logout", {
@@ -46,7 +60,7 @@ console.log(user, setUser)
       }
     })
   }
-  
+
 
   return(
 
@@ -58,8 +72,8 @@ console.log(user, setUser)
           <p>Welcome, {user.first_name}  
           <button onClick={handleLogout}>Logout</button>
           </p>
-          {userInfo}
-          {user.apartment ? <TenantNavbar user={user}/> : <SuperNavbar/>}
+          {isSuper ? <SuperCard/> : <TenantCard/>}
+          {user.apartment ? <TenantNavbar/> : <SuperNavbar/>}
         </div>
         : 
       <div id="login-window">
@@ -74,7 +88,12 @@ console.log(user, setUser)
         <Route exact path="/register" element={<Register/>}/>
         <Route exact path="/complaintsbybuilding" element={<ComplaintsByBuilding/>}/>
         <Route exact path="/homepage/home" element={<Home/>}/>
-        
+        <Route path="/allcomplaints" element={<AllSuperComplaints complaints={complaints} setComplaints={setComplaints}/>}/>
+        <Route path="/super/complaintsbybuilding" element={<SuperComplaintsByBuilding />}/>
+        <Route path="/complaintsbydate" element={<ComplaintsByDate/>}/>
+        <Route exact path="/buildingcomplaints" element={<BuildingComplaints complaints={complaints} setComplaints={setComplaints}/>}/>
+        <Route exact path="/mycomplaints" element={<MyComplaints complaints={complaints} setComplaints={setComplaints}/>}/>
+        <Route exact path="/filecomplaints" element={<FileComplaint complaints={complaints} setComplaints={setComplaints}/>}/>
       </Routes>
      
     </div>

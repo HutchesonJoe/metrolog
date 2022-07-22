@@ -2,12 +2,15 @@ import { useEffect, useState, useContext } from "react";
 import { ComplaintTypesContext } from "../ComplaintTypesInfo"
 import ComplaintCard from "../Cards/ComplaintCard";
 import { UserContext } from "../UserContext";
-import { BuildingsContext } from "../BuildingsInfo"
+import { TenantComplaintContext } from "../TenantComplaintsContext"
 
-function AllSuperComplaints({complaints, setComplaints}){
-  const user = useContext(UserContext)
-  const [buildings, setBuildings] = useState([])
+function AllSuperComplaints(){
+  const [user] = useContext(UserContext)
+  const [complaints] = useContext(TenantComplaintContext)
+  
   console.log(user)
+  console.log(complaints)
+
   useEffect(()=>{
     if(user.buildings){
       setBuildings(user.buildings)
@@ -17,14 +20,14 @@ function AllSuperComplaints({complaints, setComplaints}){
   const[typeId, setTypeId] = useState()
   const[allComplaints, setAllComplaints] = useState([])
 
-  useEffect(()=>{
+  // useEffect(()=>{
     
-    if(buildings!==[]){
-      const complaints = buildings.map((building)=>building.tenant_complaints);
-      setComplaints(complaints.flat());
-      setAllComplaints(complaints.flat())
-    }
-  },[buildings])
+  //   if(buildings!==[]){
+  //     const complaints = buildings.map((building)=>building.tenant_complaints);
+  //     setComplaints(complaints.flat());
+  //     setAllComplaints(complaints.flat())
+  //   }
+  // },[buildings])
   
   const complaintTypes = useContext(ComplaintTypesContext)
   

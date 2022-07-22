@@ -12,9 +12,8 @@ function Login({setUser}){
 
   function handleLogin(e){
     e.preventDefault()
-    setUser(null)
     const user = {username, password, isSuper}
-    
+    console.log(user)
     fetch("/login", {
       method: "POST",
       headers: {

@@ -22,9 +22,10 @@ function ComplaintCard({tenantComplaint, complaints, setComplaints}){
   const[compStatus, setCompStatus] = useState()
   
   const complaintTypes = useContext(ComplaintTypesContext)
+  
   const buildings = useContext(BuildingsContext)
   const [user] = useContext(UserContext)
-
+  console.log(complaints)
   useEffect(()=>{
     setComplaint(tenantComplaint);
     if(user && user.buildings){
@@ -32,17 +33,22 @@ function ComplaintCard({tenantComplaint, complaints, setComplaints}){
     }
   },[user])
 
-  useEffect(()=>{
-    setCompStatus(tenantComplaint.resolved)
-  })
+  // useEffect(()=>{
+  //   setCompStatus(tenantComplaint.resolved)
+  // })
   
   let building
   
   if(buildings){
     building = buildings.find(building=>building.id===tenantComplaint.building_id)
   }
-  const complaintType = complaintTypes.find(c=>c.id===tenantComplaint.complaint_id)
 
+  let complaintType
+  if(complaint){
+    complaintType = complaintTypes.find(c=>c.id===complaint.id)
+  }
+
+  
   function handleClick(){
     setErrors([])
     if(!user){
@@ -81,7 +87,7 @@ function ComplaintCard({tenantComplaint, complaints, setComplaints}){
   if(tenantComplaint!==undefined){
     return(
       <div id="complaint-card">
-        {complaint ? <h3>{complaintType.complaint_type}</h3> : ""}
+        {complaintType ? <h3>{complaintType.complaint_type}</h3> : ""}
         {building ? <h4>{building.address}</h4>: "" }
         <div>Unit #: {tenantComplaint.unit}</div>
         <div>Tenant notes: {tenantComplaint.tenant_notes}</div>

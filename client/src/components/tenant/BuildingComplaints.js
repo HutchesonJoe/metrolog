@@ -4,11 +4,11 @@ import ComplaintCard from "../Cards/ComplaintCard"
 
 function BuildingComplaints({complaints, setComplaints}){
   
-  const user = useContext(UserContext)
+  const [user] = useContext(UserContext)
   
   useEffect(()=>{
     console.log(user)
-    if(user.building){
+    if(user && user.building){
       setComplaints(user.building.tenant_complaints)
     }
       

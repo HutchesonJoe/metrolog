@@ -6,6 +6,7 @@ import Home from './homepage/Home';
 import { BuildingsProvider } from "./BuildingsInfo";
 import { ComplaintTypesProvider } from "./ComplaintTypesInfo";
 import { UserProvider } from "./UserContext"
+import { TenantComplaintProvider } from './TenantComplaintsContext';
 
 function App() {
 
@@ -15,14 +16,16 @@ function App() {
       <Banner/>
       
       <div>
-          <UserProvider>
-            <BuildingsProvider>
-              <ComplaintTypesProvider>
-                <Home/>
-              </ComplaintTypesProvider>
-            </BuildingsProvider>
-          </UserProvider>
           
+          <TenantComplaintProvider>
+            <UserProvider>
+              <BuildingsProvider>
+                <ComplaintTypesProvider>
+                  <Home/>
+                </ComplaintTypesProvider>
+              </BuildingsProvider>
+            </UserProvider>
+          </TenantComplaintProvider>
         
       </div>
       

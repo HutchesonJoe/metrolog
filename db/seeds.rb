@@ -7,7 +7,7 @@ joe = Tenant.create(first_name: "Joe", last_name: "Schmoe", email: "joe@schmoe.c
 fee = Tenant.create(first_name: "Felecia", last_name: "Harrelson", email: "fee@harrelson.com", phone_number: "646-842-2454", currently_occupying: true, password: "felecia", username: "felecia", password_confirmation: "felecia")
 cindy = Tenant.create(first_name: "Cindy", last_name: "Holmes", email: "cindy@gmail.com", phone_number: "646-842-2454", additional_tenants: "Sandy Smith", currently_occupying: true, username: "cindy", password: "cindy",  password_confirmation: "cindy")
 dan = Tenant.create(first_name: "Daniel", last_name: "Craig", email: "dcraig@yahoo.com", phone_number: "646-842-2454", currently_occupying: true, username: "dan", password: "dan", password_confirmation: "dan")
-
+sonia = Tenant.create(first_name: "Sonia", last_name: "Marquez", email: "sonia@marquez.com", phone_number: "646-842-2454", additional_tenants: "Jim Marquez, Cindy Marquez", currently_occupying: true, password: "sonia", username: "sonia", password_confirmation: "sonia")
 #supers
 
 tony = Super.create(first_name: "Antonio", last_name: "Banderas", email: "Abanderas@gmail.com", phone_number: "777-777-7777", username: "tony", password: "tony", password_confirmation: "tony")
@@ -36,12 +36,14 @@ joes_apartment = Apartment.create(building_id: eastside.id, unit_number: "1B", t
 fees_apartment = Apartment.create(building_id: riverside.id, unit_number: "24", tenant_id: fee.id)
 cindys_apartment = Apartment.create(building_id: westside1.id, unit_number: "14A", tenant_id: cindy.id)
 dans_apartment = Apartment.create(building_id: westside2.id, unit_number: "4C", tenant_id: dan.id)
-
+sonias_apartment = Apartment.create(building_id: eastside.id, unit_number: "3C", tenant_id: sonia.id)
 #tenant_complaints
 mold_complaint = TenantComplaint.create(tenant_id: joe.id, building_id: eastside.id, complaint_id: mold.id, resolved: false, tenant_notes: "Black mold under kitchen sink.", unit: "1B")
 hot_water_complaint = TenantComplaint.create(tenant_id: fee.id, building_id: riverside.id, complaint_id: hot_water.id, resolved: false, tenant_notes: "No hot water at night, after 6pm.", unit: "24")
 mold_complaint = TenantComplaint.create(tenant_id: fee.id, building_id: riverside.id, complaint_id: mold.id, resolved: true, tenant_notes: "Black mold under kitchen sink.", unit: "24")
 noise_complaint = TenantComplaint.create(tenant_id: cindy.id, building_id: westside1.id, complaint_id: noise.id, resolved: false, tenant_notes: "Loud kids in the hallway.", unit: "14A")
-pests = TenantComplaint.create(tenant_id: dan.id, building_id: westside2.id, complaint_id: pests.id, resolved: false, tenant_notes: "Aggresive cockroach infestation.", super_notes: "Exterminator scheduled", unit: "4C")
+pests = TenantComplaint.create(tenant_id: dan.id, building_id: westside2.id, complaint_id: pests.id, resolved: false, tenant_notes: "Aggresive cockroach infestation.", super_notes: "Exterminator scheduled", unit: dans_apartment.unit_number)
+other = TenantComplaint.create(tenant_id: sonia.id, building_id: eastside.id, complaint_id: other.id, resolved: false, tenant_notes: "Plaster peeling in the bathroom.",  unit: sonias_apartment.unit_number)
+pests2 = TenantComplaint.create(tenant_id: sonia.id, building_id: eastside.id, complaint_id: pests.id, resolved: false, tenant_notes: "Aggresive cockroach infestation.", super_notes: "Exterminator scheduled", unit: sonias_apartment.unit_number)
 
 puts "Metro seeded!"

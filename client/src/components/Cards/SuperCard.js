@@ -1,5 +1,9 @@
-function SuperCard({user, getComplaintInfo}){
+import { useContext } from "react";
+import { UserContext } from "../UserContext"
 
+function SuperCard(){
+  const [user] = useContext(UserContext)
+  console.log(user)
   let buildingList
 
   if(user.buildings){
