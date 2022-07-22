@@ -3,10 +3,6 @@ import { BuildingsContext } from "../BuildingsInfo";
 
 function TenantCard({user}){
   
-  // const buildings = useContext(BuildingsContext)
-  // const building = buildings.find((building)=>building.id===user.apartment.building_id)
-  console.log(user)
-  // console.log(buildings)
   return(
     <div>
       <h4>Tenant Information:</h4>

@@ -4,7 +4,7 @@ const UserContext = createContext()
 
 function UserProvider({children}){
   const [user, setUser] = useState([])
-  
+  console.log(user)
   useEffect(()=>{
     fetch("/me")
     .then(r=>r.json())

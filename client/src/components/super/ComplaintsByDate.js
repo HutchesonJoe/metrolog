@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import ComplaintCard from "../Cards/ComplaintCard";
 
-function ComplaintsByDate(){
-  const[complaints, setComplaints] = useState([])
-  // const[filteredComplaints, setFilteredComplaints] = useState()
+function ComplaintsByDate({ setComplaint}){
+
+  const[complaints, setComplaints] = useState()
   const[filter, setFilter] = useState("/by-date")
 
   useEffect(()=>{
@@ -11,25 +11,18 @@ function ComplaintsByDate(){
     .then(r=>r.json())
     .then((data)=>{
       setComplaints(data);
-      // setFilteredComplaints(data)
     })
   },[filter])
+  
 
-  // function setAllComplaints(){
-  //   fetch("/by-date")
-  //   .then(r=>r.json())
-  //   .then((data)=>setComplaints(data))
-  // }
-  
-  
   function filterComplaints(e){
    setFilter(e.target.value)
   }
 
   let complaintList
 
-  if(complaints.length!==0){
-    complaintList = complaints.map((complaint)=><ComplaintCard key={complaint.id} tenantComplaint={complaint}/>)
+  if(complaints){
+    complaintList = complaints.map((complaint)=><ComplaintCard key={complaint.id} tenantComplaint={complaint} setComplaint={setComplaint}/>)
   }
   
   return(

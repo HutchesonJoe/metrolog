@@ -6,26 +6,27 @@ import { BuildingsContext } from "../BuildingsInfo"
 
 function AllSuperComplaints({complaints, setComplaints}){
   const user = useContext(UserContext)
-  const buildings = useContext(BuildingsContext)
-  const superBuildings = user.buildings
-  const [typeId, setTypeId] = useState()
+  const [buildings, setBuildings] = useState([])
+  
+  useEffect(()=>{
+    if(user.buildings){
+      setBuildings(user.buildings)
+    }
+  },[user])
+  
+  const[typeId, setTypeId] = useState()
   const[allComplaints, setAllComplaints] = useState([])
 
   useEffect(()=>{
-    if(superBuildings!==undefined){
-      const complaints = superBuildings.map((building)=>building.tenant_complaints);
+    
+    if(buildings!==[]){
+      const complaints = buildings.map((building)=>building.tenant_complaints);
       setComplaints(complaints.flat());
       setAllComplaints(complaints.flat())
     }
   },[buildings])
   
-  // const allComplaints = buildings.map((building)=>building.complaints).flat()
-  // setComplaints(allComplaints)
   const complaintTypes = useContext(ComplaintTypesContext)
-  
-  // useEffect(()=>{
-  //   setComplaints(allComplaints)
-  // },[])
   
   let complaintList
 

@@ -12,6 +12,7 @@ function Login({setUser}){
 
   function handleLogin(e){
     e.preventDefault()
+    setUser(null)
     const user = {username, password, isSuper}
     
     fetch("/login", {
@@ -25,7 +26,10 @@ function Login({setUser}){
         r.json().then((user) => setUser(user));
         navigate("/home", { replace: true })
       } else {
-        r.json().then((err) => setErrors(err.errors))
+        r.json().then((err) => {
+          setErrors(err.errors);
+          setUser(null);
+        })
       }
     })
    
@@ -37,7 +41,7 @@ function Login({setUser}){
       <form onSubmit={handleLogin}>
       <div>
           <label>I am a current: </label>
-          <select onChange={(e)=>setIsSuper(e.target.value)}>
+          <select onChange={()=>setIsSuper(!isSuper)}>
             <option value={false}>Tenant</option>
             <option value={true}>Superintendent</option>
           </select>

@@ -1,6 +1,10 @@
 
 
 class TenantComplaintsController < ApplicationController
+  
+  rescue_from ActiveRecord::RecordInvalid, with: :render_invalid_response
+  #can i do an "except"
+  skip_before_action :authorized, only: [:index, :destroy, :order_by_date, :create, :get_open, :get_closed, :update]
 
   def index
     tenant_complaints = TenantComplaint.all
@@ -8,10 +12,8 @@ class TenantComplaintsController < ApplicationController
   end
 
   def update 
-   #this is not quite working
     complaint = TenantComplaint.find(params[:id])
-    # byebug
-    complaint.update(super_notes: params[:super_notes])
+    complaint.update(tenant_complaint_params)
     render json: complaint 
   end
 
@@ -26,8 +28,14 @@ class TenantComplaintsController < ApplicationController
   end
 
   def destroy
+    if !session[:is_super]
+      byebug
     complaint = TenantComplaint.find(params[:id])
     complaint.destroy
+    head :no_content
+    else
+      return render json: "Only tenants can delete a complaint.", status: :unauthorized
+    end
   end
 
   def order_by_date
@@ -38,7 +46,6 @@ class TenantComplaintsController < ApplicationController
   def get_open
     open_complaints = TenantComplaint.select {|c| !c.resolved?}
     render json: open_complaints
-    
   end
 
   def get_closed
@@ -49,8 +56,14 @@ class TenantComplaintsController < ApplicationController
   private
 
   def tenant_complaint_params
-    params.permit(tenant_notes, resolved: false, complaint_id, tenant_id, building_id, unit)
+    params.permit(:tenant_notes, :resolved, :complaint_id, :tenant_id, :building_id, :unit, :super_notes, :tenant_notes)
   end
+
+  def render_invalid_response(invalid)
+    render json: { errors: invalid.record.errors.full_messages }, status: 422
+  end
+
+  
   # def @timeOpen
   #   #???
   #   complaint = Tenant_complaint.find(params[:id])

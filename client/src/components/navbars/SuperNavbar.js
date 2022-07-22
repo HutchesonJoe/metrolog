@@ -8,19 +8,21 @@ import { useState } from "react";
 
 
 function SuperNavbar(){
-  const user = useContext(UserContext)
+  
   const [complaints, setComplaints] = useState([])
+  
   
   return(
     <div>
       <div id="navbar">
         <NavLink to="/allcomplaints" className="navlink">View All Complaints</NavLink>
         <NavLink to="/super/complaintsbybuilding" className="navlink">By Building</NavLink>
-        <NavLink to="/complaintsbydate" className="navlink">By Date</NavLink>
+        <NavLink to="/complaintsbydate" className="navlink" complaints={complaints}>By Date</NavLink>
       </div>
       <Routes>
-        <Route path="/allcomplaints" element={<AllSuperComplaints user={user} complaints={complaints} setComplaints={setComplaints}/>}/>
-        <Route path="/super/complaintsbybuilding" element={<SuperComplaintsByBuilding user={user}/>}/>
+        <Route path="/allcomplaints" element={<AllSuperComplaints complaints={complaints} setComplaints={setComplaints}/>}/>
+        <Route path="/super/complaintsbybuilding" element={<SuperComplaintsByBuilding />}/>
+        {/* this route needs attention...where is it getting'user? */}
         <Route path="/complaintsbydate" element={<ComplaintsByDate/>}/>
       </Routes>
     </div>

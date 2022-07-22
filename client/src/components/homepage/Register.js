@@ -1,5 +1,4 @@
 import { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { BuildingsContext } from "../BuildingsInfo"
 import Errors from '../Errors';
 
@@ -20,7 +19,7 @@ function Register(){
   const[passwordConfirmation, setPasswordConfirmation] = useState("")
 
   const buildings = useContext(BuildingsContext)
-  // const navigate = useNavigate()
+  
 
   const buildingList = buildings.map((building)=><option key={building.id} value={building.id}>{building.address}</option>)
 
@@ -62,7 +61,7 @@ function Register(){
   
   function handleSubmit(e){
     e.preventDefault()
-    setFormOn(false)
+    
 
     let targetRoute
     let user
@@ -102,7 +101,12 @@ function Register(){
     })
     .then((r) => {
       if (r.ok) {
-        r.json().then((data)=>setTenantId(data.id));
+        r.json().then((data)=>{
+          if(isTenant){
+            setTenantId(data.id)
+          }
+          setFormOn(false)
+        });
         setErrors(["Success! Log in above."]);
         if(isTenant){setApartment()}
         // navigate("/login", { replace: true })

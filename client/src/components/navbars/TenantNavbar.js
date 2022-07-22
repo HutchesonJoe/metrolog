@@ -1,13 +1,19 @@
 import {Routes, Route, NavLink} from "react-router-dom";
-// import { useContext } from "react";
-// import { UserContext } from "../UserContext";
-import LogOut from "../LogOut";
+import { useState, useContext, useEffect } from "react";
+import { UserContext, } from "../UserContext";
 import MyComplaints from "../tenant/MyComplaints";
 import FileComplaint from "../tenant/FileComplaint";
 import BuildingComplaints from '../tenant/BuildingComplaints';
 
 function TenantNavbar(){
-
+  const user = useContext(UserContext)
+  const [complaints, setComplaints] = useState([])
+  console.log(user)
+  useEffect(()=>{
+    if(user && user.building){
+      setComplaints(user.building.tenant_complaints)
+    }
+  },[user])
 
   return(
     <div>
@@ -17,9 +23,9 @@ function TenantNavbar(){
         <NavLink to="/filecomplaints">File New Complaint</NavLink>
       </div>
       <Routes>
-        <Route exact path="/buildingcomplaints" element={<BuildingComplaints/>}/>
-        <Route exact path="/mycomplaints" element={<MyComplaints/>}/>
-        <Route exact path="/filecomplaints" element={<FileComplaint/>}/>
+        <Route exact path="/buildingcomplaints" element={<BuildingComplaints complaints={complaints} setComplaints={setComplaints}/>}/>
+        <Route exact path="/mycomplaints" element={<MyComplaints complaints={complaints} setComplaints={setComplaints}/>}/>
+        <Route exact path="/filecomplaints" element={<FileComplaint complaints={complaints} setComplaints={setComplaints}/>}/>
       </Routes>
     </div>
   )

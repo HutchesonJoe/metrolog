@@ -71,3 +71,13 @@ code {
   border-width: 1px;
   border-style: solid;
 }
+
+#errors{
+  color: white;
+  background-color: red;
+}
+
+#open{
+  color: red;
+}
+

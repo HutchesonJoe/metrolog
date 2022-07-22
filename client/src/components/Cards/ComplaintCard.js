@@ -1,23 +1,40 @@
-// import moment from "momentjs"
+// import { format } from 'date-fns'
 import { useContext, useState, useEffect } from "react";
 import { ComplaintTypesContext } from "../ComplaintTypesInfo";
 import { BuildingsContext } from "../BuildingsInfo";
 import { UserContext } from "../UserContext"
-import EditComplaint from "../tenant/EditComplaint";
-import SuperAddNote from "../super/SuperAddNote"
+import EditComplaint from "../EditComplaint";
+import Errors from "../Errors"
 
 
-function ComplaintCard({tenantComplaint}){
-  const[buttonChoice, setButtonChoice] = useState("")
-  const[complaint, setComplaint] = useState({tenantComplaint})
+function ComplaintCard({tenantComplaint, complaints, setComplaints}){
+ 
   
-  useEffect(()=>{
-    setComplaint(tenantComplaint)
-  },[])
-
+  const createdAt = new Date(tenantComplaint.created_at)
+  const updatedAt = new Date(tenantComplaint.updated_at)
+  const now = new Date()
+  const timeLapsed = Math.floor(Math.abs(now - createdAt)/(1000 * 60 * 60 * 24))
+  
+  const[editWindowOn, setEditWindowOn] = useState(false)
+  const[complaint, setComplaint] = useState({tenantComplaint})
+  const[errors, setErrors] = useState([])
+  const[isSuper, setIsSuper] = useState(false)
+  const[compStatus, setCompStatus] = useState()
+  
   const complaintTypes = useContext(ComplaintTypesContext)
   const buildings = useContext(BuildingsContext)
   const user = useContext(UserContext)
+
+  useEffect(()=>{
+    setComplaint(tenantComplaint);
+    if(user && user.buildings){
+      setIsSuper(true)
+    }
+  },[user])
+
+  useEffect(()=>{
+    setCompStatus(tenantComplaint.resolved)
+  })
   
   let building
   
@@ -25,26 +42,40 @@ function ComplaintCard({tenantComplaint}){
     building = buildings.find(building=>building.id===tenantComplaint.building_id)
   }
   const complaintType = complaintTypes.find(c=>c.id===tenantComplaint.complaint_id)
-  const date = tenantComplaint.created_at
 
-
-  let complaintStatus
-  if(!tenantComplaint.resolved){
-    complaintStatus = "Open"
-  } else{
-    complaintStatus = "Closed"
-  }
-
-  let editWindow = ""
-
-  
-    if(buttonChoice==="Edit"){
-      editWindow = <EditComplaint complaintId={tenantComplaint.id} setComplaint={setComplaint}/>
-    } else if (buttonChoice==="Add Note" && user.apartment){
-      editWindow = <EditComplaint complaintId={tenantComplaint.id}/>
-    } else if (buttonChoice==="Add Note" && user.buildings){
-      editWindow = <SuperAddNote complaintId={tenantComplaint.id} setComplaint={setComplaint}/>
+  function handleClick(){
+    setErrors([])
+    if(!user){
+      setErrors(["You must be logged in to edit/update/delete complaints."]);
+    } else {
+      setEditWindowOn(!editWindowOn)
     }
+  }
+    
+
+  function handleDelete(){
+    if(isSuper){
+      setErrors(["Only a tenant can delete a complaint."])
+    } else {
+      const deleteConfirm = window.confirm("Are you sure you want to delete this complaint? You CANNOT undo this action. 'OK' to confirm, or CANCEL.")
+      if(deleteConfirm){
+        fetch(`/tenant_complaints/${tenantComplaint.id}`,{
+        method: "DELETE"
+        })
+        .then((r)=>{
+          if(r.ok){
+           
+            const filteredComplaints = complaints.filter((comp)=>comp.id!==(parseInt(complaint.id)));
+            setComplaints(filteredComplaints)
+          } else {
+              r.json().then((err)=> setErrors(err.errors))
+            }
+            
+          })
+        }
+      }
+    
+    }  
  
   
   if(tenantComplaint!==undefined){
@@ -55,17 +86,19 @@ function ComplaintCard({tenantComplaint}){
         <div>Unit #: {tenantComplaint.unit}</div>
         <div>Tenant notes: {tenantComplaint.tenant_notes}</div>
         <div>Super notes: {complaint.super_notes}</div>
-        <div>{tenantComplaint.created_at}</div>
-        <div>{tenantComplaint.updated_at}</div>
-        <div>{complaintStatus}</div>
-        <div>How old is this complaint?</div>
+        <div>Opened: {createdAt.toString()}</div>
+        <div>Updated: {updatedAt.toString()}</div>
+        <div id={compStatus ? "" : "open"}>{compStatus ? "Closed" : "Open"}</div>
+        {compStatus ? "" : <div>This complaint has been open for {timeLapsed} days.</div>}
         <div>
-          <button onClick={()=>setButtonChoice("Edit")}>Edit Complaint</button>
-          <button onClick={()=>setButtonChoice("Add Note")}>Add Notes</button>
-          <button onClick={()=>setButtonChoice("Delete")}>Delete Complaint</button>
+          <button onClick={handleClick}>{editWindowOn ? "Close" : "Edit Complaint/Add Note"}</button>
+          <button onClick={handleDelete}>Delete Complaint</button>
         </div>
         <div id="edit-window">
-          {editWindow}
+          {editWindowOn ? <EditComplaint complaintId={tenantComplaint.id} setComplaint={setComplaint} setComplaints={setComplaints} isSuper={isSuper} setIsSuper={setIsSuper}/> : ""}
+        </div>
+        <div>
+          <Errors errors={errors}/>
         </div>
       </div>
     )

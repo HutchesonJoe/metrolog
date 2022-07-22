@@ -3,17 +3,18 @@ import { NavLink, Routes, Route } from "react-router-dom"
 import Login from "./Login";
 import Register from "./Register";
 import ComplaintsByBuilding from "../ComplaintsByBuilding";
-import ComplaintCard from "../Cards/ComplaintCard";
 import TenantInfo from "../Cards/TenantCard";
 import SuperInfo from "../Cards/SuperCard";
 import { BuildingsContext } from "../BuildingsInfo";
 import TenantNavbar from "../navbars/TenantNavbar";
 import SuperNavbar from "../navbars/SuperNavbar";
+import { UserContext } from "../UserContext";
 
 
 function Home(){
   const[user, setUser] = useState()
-  const[buildingComplaints, setBuildingComplaints] = useState([])
+  console.log(user)
+  // const user = useContext(UserContext)
 
   useEffect(()=>{
     
@@ -25,7 +26,7 @@ function Home(){
   },[])
   
 
-  const buildings = useContext(BuildingsContext)
+  
   
   let userInfo
 
