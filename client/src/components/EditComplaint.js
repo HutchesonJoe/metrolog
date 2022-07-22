@@ -3,7 +3,7 @@ import { UserContext } from "./UserContext"
 
 function EditComplaint({complaintId, setComplaint, isSuper}){
 const[notes, setNotes] = useState("")
-const user = useContext(UserContext)
+// const [user] = useContext(UserContext)
 
 // useEffect(()=>{
 //   if(user.buildings){

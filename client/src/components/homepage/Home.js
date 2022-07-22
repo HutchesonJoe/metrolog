@@ -12,10 +12,10 @@ import { UserContext } from "../UserContext";
 
 
 function Home(){
-  const[user, setUser] = useState()
-  console.log(user)
-  // const user = useContext(UserContext)
+//  const[user, setUser] = useState()
 
+const [user, setUser] = useContext(UserContext)
+console.log(user, setUser)
   useEffect(()=>{
     
     fetch("/me").then((r)=>{
@@ -59,7 +59,7 @@ function Home(){
           <button onClick={handleLogout}>Logout</button>
           </p>
           {userInfo}
-          {user.apartment ? <TenantNavbar user={user}/> : <SuperNavbar user={user}/>}
+          {user.apartment ? <TenantNavbar user={user}/> : <SuperNavbar/>}
         </div>
         : 
       <div id="login-window">

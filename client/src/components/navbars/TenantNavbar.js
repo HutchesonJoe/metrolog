@@ -6,9 +6,9 @@ import FileComplaint from "../tenant/FileComplaint";
 import BuildingComplaints from '../tenant/BuildingComplaints';
 
 function TenantNavbar(){
-  const user = useContext(UserContext)
+  const [user] = useContext(UserContext)
   const [complaints, setComplaints] = useState([])
-  console.log(user)
+  console.log(user.building.tenant_complaints)
   useEffect(()=>{
     if(user && user.building){
       setComplaints(user.building.tenant_complaints)

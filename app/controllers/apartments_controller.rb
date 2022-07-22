@@ -1,6 +1,7 @@
 class ApartmentsController < ApplicationController
   rescue_from ActiveRecord::RecordInvalid, with: :render_invalid_response
-
+  #delete this??
+  skip_before_action :authorized, only: [:index]
   def index
     apartments = Apartment.all 
     render json: apartments

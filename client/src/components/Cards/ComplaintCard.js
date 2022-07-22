@@ -23,7 +23,7 @@ function ComplaintCard({tenantComplaint, complaints, setComplaints}){
   
   const complaintTypes = useContext(ComplaintTypesContext)
   const buildings = useContext(BuildingsContext)
-  const user = useContext(UserContext)
+  const [user] = useContext(UserContext)
 
   useEffect(()=>{
     setComplaint(tenantComplaint);

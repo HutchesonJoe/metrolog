@@ -7,7 +7,7 @@ import { BuildingsContext } from "../BuildingsInfo"
 function AllSuperComplaints({complaints, setComplaints}){
   const user = useContext(UserContext)
   const [buildings, setBuildings] = useState([])
-  
+  console.log(user)
   useEffect(()=>{
     if(user.buildings){
       setBuildings(user.buildings)

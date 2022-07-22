@@ -29,7 +29,6 @@ class TenantComplaintsController < ApplicationController
 
   def destroy
     if !session[:is_super]
-      byebug
     complaint = TenantComplaint.find(params[:id])
     complaint.destroy
     head :no_content

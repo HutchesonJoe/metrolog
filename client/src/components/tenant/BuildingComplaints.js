@@ -5,7 +5,7 @@ import ComplaintCard from "../Cards/ComplaintCard"
 function BuildingComplaints({complaints, setComplaints}){
   
   const user = useContext(UserContext)
-
+  
   useEffect(()=>{
     console.log(user)
     if(user.building){
