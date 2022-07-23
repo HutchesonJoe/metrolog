@@ -6,9 +6,9 @@ function MyComplaints({complaints, setComplaints}){
   const[myComplaints, setMyComplaints] = useState([])
 
   const [user] = useContext(UserContext)
- 
+  console.log(user)
   useEffect(()=>{
-    if(user.apartment){
+    if(user && user.apartment){
       const filteredComplaints = complaints.filter((complaint)=>complaint.tenant_id===user.id)
       setMyComplaints(filteredComplaints)
     }
@@ -16,7 +16,7 @@ function MyComplaints({complaints, setComplaints}){
   
   let myComplaintList
 
-  if(user.apartment){
+  if(user && user.apartment){
     console.log(complaints)
     myComplaintList = myComplaints.map((complaint)=>{
       return <ComplaintCard tenantComplaint={complaint} key={complaint.id} setComplaints={setComplaints} complaints={complaints}/>

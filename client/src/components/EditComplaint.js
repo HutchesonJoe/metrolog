@@ -1,15 +1,19 @@
 import { useState, useContext, useEffect } from "react";
-import { UserContext } from "./UserContext"
+import { ComplaintTypesContext } from "./ComplaintTypesInfo"
 
-function EditComplaint({complaintId, setComplaint, isSuper}){
+function EditComplaint({complaintId, complaint, setComplaint, isSuper}){
 const[notes, setNotes] = useState("")
-// const [user] = useContext(UserContext)
+const[type, setType] = useState(complaint.complaint_type)
+const[typeId, setTypeId] = useState(complaint.complaint_id)
+const complaintTypes = useContext(ComplaintTypesContext)
 
-// useEffect(()=>{
-//   if(user.buildings){
-//     setIsSuper(true)
-//   }
-// },[user])
+useEffect(()=>{
+  if(isSuper){
+    setNotes(complaint.super_notes)
+  } else {
+    setNotes(complaint.tenant_notes)
+  }
+},[])
 
 let updatedNote
 
@@ -19,11 +23,25 @@ if(isSuper){
   }
 } else {
   updatedNote = {
+    complaint_type: type,
+    complaint_id: typeId,
     tenant_notes: notes
   }
 }
 
+
+
+const complaintTypeOptions = complaintTypes.map((type)=><option key={type.id} value={type.id}>{type.complaint_type}</option>)
+
+function handleSelect(e){
+  if(e.target.value!==0){
+    setTypeId(e.target.value)
+    const complaintType = complaintTypes.find((type)=>type.id===parseInt(e.target.value))
+    setType(complaintType.complaint_type)
+  }
+}
 function handleSubmit(e){
+ 
   e.preventDefault()
   fetch(`/tenant_complaints/${complaintId}`,{
     method: "PATCH",
@@ -33,8 +51,10 @@ function handleSubmit(e){
     body: JSON.stringify(updatedNote)
   })
   .then(r=>r.json())
-  .then(data=>setComplaint(data))
-  setNotes("")
+  .then((data)=>{
+    setComplaint(data);
+  })
+  
 }
 
   return(
@@ -43,8 +63,9 @@ function handleSubmit(e){
         {isSuper ?
         "" :
         <div id="select-type">
-          <select>
-            <option>Select Type</option>
+          <select onChange={handleSelect}>
+            <option value={0}>Select Type</option>
+            {complaintTypeOptions}
           </select>
         </div>}
         <input placeholder="Enter notes" onChange={(e)=>setNotes(e.target.value)} value={notes}>

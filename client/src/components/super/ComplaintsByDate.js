@@ -1,28 +1,28 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import ComplaintCard from "../Cards/ComplaintCard";
+import { TenantComplaintContext } from "../TenantComplaintsContext"
 
-function ComplaintsByDate({ setComplaint}){
-
-  const[complaints, setComplaints] = useState()
+function ComplaintsByDate(){
+  const[complaints, setComplaints] = useContext(TenantComplaintContext)
   const[filter, setFilter] = useState("/by-date")
+  console.log(complaints)
 
-  useEffect(()=>{
-    fetch(filter)
-    .then(r=>r.json())
-    .then((data)=>{
-      setComplaints(data);
-    })
-  },[filter])
-  
+  // useEffect(()=>{
+  //   fetch(filter)
+  //   .then(r=>r.json())
+  //   .then((data)=>{
+  //     setComplaints(data);
+  //   })
+  // },[filter])
 
   function filterComplaints(e){
-   setFilter(e.target.value)
+    console.log(e.target.value)
   }
-
+  
   let complaintList
 
   if(complaints){
-    complaintList = complaints.map((complaint)=><ComplaintCard key={complaint.id} tenantComplaint={complaint} setComplaint={setComplaint}/>)
+    complaintList = complaints.map((complaint)=><ComplaintCard key={complaint.id} tenantComplaint={complaint}/>)
   }
   
   return(

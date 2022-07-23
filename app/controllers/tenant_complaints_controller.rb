@@ -36,7 +36,7 @@ class TenantComplaintsController < ApplicationController
       return render json: "Only tenants can delete a complaint.", status: :unauthorized
     end
   end
-
+#am I using these?
   def order_by_date
     @complaints = TenantComplaint.order(:created_at)
     render json: @complaints 
@@ -55,7 +55,7 @@ class TenantComplaintsController < ApplicationController
   private
 
   def tenant_complaint_params
-    params.permit(:tenant_notes, :resolved, :complaint_id, :tenant_id, :building_id, :unit, :super_notes, :tenant_notes)
+    params.permit(:tenant_notes, :resolved, :complaint_id, :tenant_id, :building_id, :unit, :super_notes, :tenant_notes, :complaint_type)
   end
 
   def render_invalid_response(invalid)

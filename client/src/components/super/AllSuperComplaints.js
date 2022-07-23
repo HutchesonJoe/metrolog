@@ -6,59 +6,68 @@ import { TenantComplaintContext } from "../TenantComplaintsContext"
 
 function AllSuperComplaints(){
   const [user] = useContext(UserContext)
-  const [complaints] = useContext(TenantComplaintContext)
+  const [complaints, setComplaints] = useContext(TenantComplaintContext)
+  const types = useContext(ComplaintTypesContext)
+
+  const [typeId, setTypeId] = useState()
+  const [openOnly, setOpenOnly] = useState(false)
+  const [buildings, setBuildings] = useState([])
+  const [allSuperComplaints, setAllSuperComplaints] = useState([])
   
-  console.log(user)
-  console.log(complaints)
+  useEffect(()=>{
+    setAllSuperComplaints(complaints)
+  },[complaints])
 
   useEffect(()=>{
-    if(user.buildings){
+    if(user && user.buildings){
       setBuildings(user.buildings)
     }
   },[user])
   
-  const[typeId, setTypeId] = useState()
-  const[allComplaints, setAllComplaints] = useState([])
+  useEffect(()=>{
+    if(openOnly===true){
+      const open = complaints.filter((complaint)=>complaint.resolved===false)
+      console.log(open)
+      setAllSuperComplaints(open)
+    } else {
+      setAllSuperComplaints(complaints)
+    }
+  },[openOnly])
 
-  // useEffect(()=>{
-    
-  //   if(buildings!==[]){
-  //     const complaints = buildings.map((building)=>building.tenant_complaints);
-  //     setComplaints(complaints.flat());
-  //     setAllComplaints(complaints.flat())
-  //   }
-  // },[buildings])
-  
-  const complaintTypes = useContext(ComplaintTypesContext)
+  useEffect(()=>{
+    if(buildings!==[]){
+      const superComplaints = buildings.map((building)=>building.tenant_complaints);
+      setComplaints(superComplaints.flat());
+    }
+  },[buildings])
   
   let complaintList
 
   if(complaints){
-    let filteredComplaints = complaints
+    let filteredComplaints = allSuperComplaints
     if(typeId){
-      filteredComplaints = complaints.filter((complaint)=>complaint.complaint_id===parseInt(typeId))
+      filteredComplaints = allSuperComplaints.filter((complaint)=>complaint.complaint_id===parseInt(typeId))
     }
     complaintList = filteredComplaints.map((complaint)=><ComplaintCard tenantComplaint={complaint} key={complaint.id}/>)
   }
 
   function selectType(e){
     setTypeId(parseInt(e.target.value))
-    const filteredComplaints = allComplaints.filter((complaint)=>complaint.complaint_id===typeId)
-    // if(e.target.value==)
-    // setType(e.target.value)
-    // const filteredComplaints = complaints.filter((complaint)=>complaint.complaint_id===parseInt(e.target.value))
-    // setComplaints(filteredComplaints)
   }
 
-  const complaintTypesOptions = complaintTypes.map((type)=><option key = {type.id} value={type.id}>{type.complaint_type}</option>)
+  const complaintTypesOptions = types.map((type)=><option key = {type.id} value={type.id}>{type.complaint_type}</option>)
   return(
     <div>
       <div>
       <label>Filter by Complaint Type: </label>
-      <select onChange={selectType}>
+      <select onChange={selectType} name="type">
         <option>Select</option>
         {complaintTypesOptions}
       </select>
+      </div>
+      <div>
+      <label >Show open complaints only</label>
+      <input type="checkbox" name="open/close" onChange={()=>setOpenOnly(!openOnly)}/>
       </div>
       {complaintList}
     </div>

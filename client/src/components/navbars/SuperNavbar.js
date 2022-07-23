@@ -17,7 +17,6 @@ function SuperNavbar(){
       <div id="navbar">
         <NavLink to="/allcomplaints" className="navlink">View All Complaints</NavLink>
         <NavLink to="/super/complaintsbybuilding" className="navlink">By Building</NavLink>
-        <NavLink to="/complaintsbydate" className="navlink" complaints={complaints}>By Date</NavLink>
       </div>
       <Routes>
         

@@ -4,7 +4,7 @@ import Home from "./homepage/Home"
 const UserContext = createContext()
 
 function UserProvider({children}){
-  const [user, setUser] = useState([])
+  const [user, setUser] = useState()
  
   // useEffect(()=>{
   //   fetch("/me")

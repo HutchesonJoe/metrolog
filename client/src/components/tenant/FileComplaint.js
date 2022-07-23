@@ -1,26 +1,31 @@
 import { useState, useContext, useEffect } from "react"
 import { UserContext } from "../UserContext"
+import { TenantComplaintContext } from "../TenantComplaintsContext"
 import { ComplaintTypesContext } from "../ComplaintTypesInfo"
 import Errors from "../Errors"
 
 function FileComplaint({complaints, setComplaints}){
   const [user] = useContext(UserContext)
+  // const [complaints, setComplaints] = useContext(TenantComplaintContext)
   const complaintTypes = useContext(ComplaintTypesContext)
-  console.log(complaintTypes)
   const[complaintType, setComplaintType] = useState()
+  const[complaintTypeId, setComplaintTypeId] = useState()
   const[tenantNotes, setTenantNotes] = useState("")
   const[submitOn, setSubmitOn] = useState(true)
   const[errors, setErrors] = useState([])
-   
+  console.log(complaints, setComplaints)
   useEffect(()=>{
-    setComplaintType(complaintTypes[0])
-  },[])
+    if(complaintTypes.length!==0){
+    setComplaintType(complaintTypes[0].complaint_type)
+    setComplaintTypeId(complaintTypes[0].id)}
+  },[complaintTypes])
 
-  const complaintTypeOptions = complaintTypes.map((complaint=><option key={complaint.id} value={complaint.id}>{complaint.complaint_type}</option>))
+  const complaintTypeOptions = complaintTypes.map((complaint=><option key={complaint.id} value={[complaint.complaint_type, complaint.id]}>{complaint.complaint_type}</option>))
 
   function handleSelectType(e){ 
-    const complaint = complaintTypes.find((complaint)=> complaint.id === parseInt(e.target.value))
-    setComplaintType(complaint)
+    const compArray = (e.target.value.split(","))
+    setComplaintType(compArray[0])
+    setComplaintTypeId(compArray[1])
   }
 
   function handleSubmit(e){
@@ -32,7 +37,9 @@ function FileComplaint({complaints, setComplaints}){
       complaint_id: complaintType.id,
       tenant_id: user.id,
       building_id: user.building.id,
-      unit: user.apartment.unit_number
+      unit: user.apartment.unit_number,
+      complaint_type: complaintType,
+      complaint_id: complaintTypeId
     }
 
     fetch('/tenant_complaints',{

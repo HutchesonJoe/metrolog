@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from "react";
-import { NavLink, Routes, Route } from "react-router-dom"
+import { NavLink, Routes, Route, useNavigate } from "react-router-dom"
 import Login from "./Login";
 import Register from "./Register";
 import ComplaintsByBuilding from "../ComplaintsByBuilding";
@@ -21,17 +21,35 @@ function Home(){
 const [user, setUser] = useContext(UserContext)
 const [complaints, setComplaints] = useContext(TenantComplaintContext)
 const [isSuper, setIsSuper] = useState()
-console.log(user)
+ 
+const navigate = useNavigate()
+
   useEffect(()=>{
     fetch("/me").then((r)=>{
       if (r.ok){
-        r.json().then((user)=>setUser(user))
+        r.json().then((user)=>{
+          setUser(user);
+        })
       }
     })
   },[])
-  
-  
-  let userInfo
+
+  useEffect(()=>{
+    if(user && user.apartment){
+      setIsSuper(false)
+    } else if (user && user.buildings){
+      setIsSuper(true)
+    }
+  },[user])
+
+  useEffect(()=>{
+    if(user && user.buildings){
+      const superComplaints = user.buildings.map((building)=>building.tenant_complaints).flat()
+      setComplaints(superComplaints)
+    } else if(user && user.apartment){
+      setComplaints(user.building.tenant_complaints)
+    }
+  },[user])
 
   useEffect(()=>{
     if(user && user.buildings){
@@ -39,14 +57,6 @@ console.log(user)
     } else {
       setIsSuper(false)
     }
-  // if(user && user.apartment){
-  //   userInfo = <TenantCard/>
-  //   setComplaints(user.building.tenant_complaints)
-  // } else if(user && user.buildings){
-  //   userInfo = <SuperCard/>
-  //   const superComplaints = user.buildings.map((building)=>building.tenant_complaints).flat()
-  //   setComplaints(superComplaints)
-  // }
 }
   ,[user])
   
@@ -57,6 +67,7 @@ console.log(user)
     }).then((r)=>{
       if (r.ok){
         setUser(null);
+        navigate("/", {replace : true })
       }
     })
   }
@@ -90,6 +101,7 @@ console.log(user)
         <Route exact path="/homepage/home" element={<Home/>}/>
         <Route path="/allcomplaints" element={<AllSuperComplaints complaints={complaints} setComplaints={setComplaints}/>}/>
         <Route path="/super/complaintsbybuilding" element={<SuperComplaintsByBuilding />}/>
+        
         <Route path="/complaintsbydate" element={<ComplaintsByDate/>}/>
         <Route exact path="/buildingcomplaints" element={<BuildingComplaints complaints={complaints} setComplaints={setComplaints}/>}/>
         <Route exact path="/mycomplaints" element={<MyComplaints complaints={complaints} setComplaints={setComplaints}/>}/>

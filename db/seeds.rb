@@ -38,12 +38,12 @@ cindys_apartment = Apartment.create(building_id: westside1.id, unit_number: "14A
 dans_apartment = Apartment.create(building_id: westside2.id, unit_number: "4C", tenant_id: dan.id)
 sonias_apartment = Apartment.create(building_id: eastside.id, unit_number: "3C", tenant_id: sonia.id)
 #tenant_complaints
-mold_complaint = TenantComplaint.create(tenant_id: joe.id, building_id: eastside.id, complaint_id: mold.id, resolved: false, tenant_notes: "Black mold under kitchen sink.", unit: "1B")
-hot_water_complaint = TenantComplaint.create(tenant_id: fee.id, building_id: riverside.id, complaint_id: hot_water.id, resolved: false, tenant_notes: "No hot water at night, after 6pm.", unit: "24")
-mold_complaint = TenantComplaint.create(tenant_id: fee.id, building_id: riverside.id, complaint_id: mold.id, resolved: true, tenant_notes: "Black mold under kitchen sink.", unit: "24")
-noise_complaint = TenantComplaint.create(tenant_id: cindy.id, building_id: westside1.id, complaint_id: noise.id, resolved: false, tenant_notes: "Loud kids in the hallway.", unit: "14A")
-pests = TenantComplaint.create(tenant_id: dan.id, building_id: westside2.id, complaint_id: pests.id, resolved: false, tenant_notes: "Aggresive cockroach infestation.", super_notes: "Exterminator scheduled", unit: dans_apartment.unit_number)
-other = TenantComplaint.create(tenant_id: sonia.id, building_id: eastside.id, complaint_id: other.id, resolved: false, tenant_notes: "Plaster peeling in the bathroom.",  unit: sonias_apartment.unit_number)
-pests2 = TenantComplaint.create(tenant_id: sonia.id, building_id: eastside.id, complaint_id: pests.id, resolved: false, tenant_notes: "Aggresive cockroach infestation.", super_notes: "Exterminator scheduled", unit: sonias_apartment.unit_number)
+mold_complaint = TenantComplaint.create(tenant_id: joe.id, building_id: eastside.id, complaint_id: mold.id, resolved: false, tenant_notes: "Black mold under kitchen sink.", unit: "1B", complaint_type: "Mold")
+hot_water_complaint = TenantComplaint.create(tenant_id: fee.id, building_id: riverside.id, complaint_id: hot_water.id, resolved: false, tenant_notes: "No hot water at night, after 6pm.", unit: "24", complaint_type: "Hot Water")
+mold_complaint2 = TenantComplaint.create(tenant_id: fee.id, building_id: riverside.id, complaint_id: mold.id, resolved: true, tenant_notes: "Black mold under kitchen sink.", unit: "24", complaint_type: "Mold")
+noise_complaint = TenantComplaint.create(tenant_id: cindy.id, building_id: westside1.id, complaint_id: noise.id, resolved: false, tenant_notes: "Loud kids in the hallway.", unit: "14A", complaint_type: "Noise")
+pests = TenantComplaint.create(tenant_id: dan.id, building_id: westside2.id, complaint_id: pests.id, resolved: false, tenant_notes: "Aggresive cockroach infestation.", super_notes: "Exterminator scheduled", unit: dans_apartment.unit_number, complaint_type: "Pests")
+other = TenantComplaint.create(tenant_id: sonia.id, building_id: eastside.id, complaint_id: other.id, resolved: false, tenant_notes: "Plaster peeling in the bathroom.",  unit: sonias_apartment.unit_number, complaint_type: "Other")
+pests2 = TenantComplaint.create(tenant_id: sonia.id, building_id: eastside.id, complaint_id: 2, resolved: false, tenant_notes: "Bedbugs!!!.",  unit: sonias_apartment.unit_number, complaint_type: "Pests")
 
 puts "Metro seeded!"
