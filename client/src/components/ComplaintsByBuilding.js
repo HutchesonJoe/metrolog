@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext} from "react";
 import ComplaintCard from "./Cards/ComplaintCard";
 import { BuildingsContext } from "./BuildingsInfo";
+import Map from "./Map"
 
 function ComplaintsByBuilding(){
 
@@ -40,6 +41,9 @@ function ComplaintsByBuilding(){
           <option value={0}>Select Building to View All Complaints</option>
           {buildingList}
         </select>
+      </div>
+      <div>
+        <Map/>
       </div>
       <div id="building-complaints-window">
       {tenantComplaints.map((tenantComplaint)=><ComplaintCard tenantComplaint={tenantComplaint} complaintTypes={complaintTypes} key={tenantComplaint.id}/>)}
