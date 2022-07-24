@@ -1,7 +1,7 @@
 class SupersController < ApplicationController
   rescue_from ActiveRecord::RecordInvalid, with: :render_invalid_response
 
-  skip_before_action :authorized, only: [:create]
+  skip_before_action :authorized, only: [:create, :index]
 
   def index
     supers = Super.all

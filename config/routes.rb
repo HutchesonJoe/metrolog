@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     resources :supers, only: [:index, :create]
     resources :complaints, only: [:index]
     resources :apartments, only: [:index, :create]
-    resources :buildings, only: [:index]
+    resources :buildings, only: [:index, :update]
     #full crud??
     resources :tenant_complaints, only: [:index, :show, :update, :create, :destroy]
 

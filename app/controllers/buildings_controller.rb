@@ -6,5 +6,10 @@ class BuildingsController < ApplicationController
     buildings = Building.all 
     render json: buildings
   end
+
+  def update
+    building = Building.find_by(id: params[:id])
+    building.update(:super_id)
+  end
   
 end

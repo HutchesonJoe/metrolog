@@ -3,12 +3,6 @@ import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/ap
 import { useState, useContext, useEffect } from "react";
 import { BuildingsContext } from '../BuildingsInfo';
 
-//import buildings info
-//set each building as an object as below
-//the buildings info is static, but the number of complaints is updated
-//latitude and longitude becomes part of the building info
-
-
 const MapContainer = () => {
   const buildings = useContext(BuildingsContext)
   
@@ -65,6 +59,7 @@ const MapContainer = () => {
               selected.location &&
               (
                 <InfoWindow
+                key={selected.id}
                 position={selected.location}
                 clickable={true}
                 onCloseClick={() => setSelected({})}

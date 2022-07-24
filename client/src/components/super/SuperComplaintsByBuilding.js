@@ -6,7 +6,14 @@ import { UserContext } from "../UserContext"
 function SuperComplaintsByBuilding(){
   const[building, setBuilding] = useState()
   const [user] = useContext(UserContext)
-  const superBuildings = user.buildings
+
+  let superBuildings
+  
+  useEffect(()=>{
+    if(user){
+      superBuildings = user.buildings
+    }
+  },[user])
 
   let buildingOptions
   if(superBuildings){

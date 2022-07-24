@@ -11,7 +11,6 @@ import SuperNavbar from "../navbars/SuperNavbar";
 import { UserContext } from "../UserContext";
 import AllSuperComplaints from "../super/AllSuperComplaints";
 import SuperComplaintsByBuilding from "../super/SuperComplaintsByBuilding";
-import ComplaintsByDate from "../super/ComplaintsByDate";
 import BuildingComplaints from "../tenant/BuildingComplaints";
 import MyComplaints from "../tenant/MyComplaints";
 import FileComplaint from "../tenant/FileComplaint";
@@ -21,26 +20,27 @@ function Home(){
 const [user, setUser] = useContext(UserContext)
 const [complaints, setComplaints] = useContext(TenantComplaintContext)
 const [isSuper, setIsSuper] = useState()
- 
+
 const navigate = useNavigate()
 
   useEffect(()=>{
     fetch("/me").then((r)=>{
       if (r.ok){
-        r.json().then((user)=>{
-          setUser(user);
+        r.json().then((me)=>{
+          setUser(me);
         })
       }
     })
   },[])
 
   useEffect(()=>{
-    if(user && user.apartment){
-      setIsSuper(false)
-    } else if (user && user.buildings){
+    if(user && user.buildings){
       setIsSuper(true)
+    } else {
+      setIsSuper(false)
     }
   },[user])
+
 
   useEffect(()=>{
     if(user && user.buildings){
@@ -50,16 +50,6 @@ const navigate = useNavigate()
       setComplaints(user.building.tenant_complaints)
     }
   },[user])
-
-  useEffect(()=>{
-    if(user && user.buildings){
-      setIsSuper(true)
-    } else {
-      setIsSuper(false)
-    }
-}
-  ,[user])
-  
 
   function handleLogout(){
     fetch("/logout", {
@@ -82,9 +72,11 @@ const navigate = useNavigate()
         <div>
           <p>Welcome, {user.first_name}  
           <button onClick={handleLogout}>Logout</button>
+          
           </p>
           {isSuper ? <SuperCard/> : <TenantCard/>}
           {user.apartment ? <TenantNavbar/> : <SuperNavbar/>}
+          
         </div>
         : 
       <div id="login-window">
@@ -102,7 +94,7 @@ const navigate = useNavigate()
         <Route path="/allcomplaints" element={<AllSuperComplaints complaints={complaints} setComplaints={setComplaints}/>}/>
         <Route path="/super/complaintsbybuilding" element={<SuperComplaintsByBuilding />}/>
         
-        <Route path="/complaintsbydate" element={<ComplaintsByDate/>}/>
+        {/* <Route path="/complaintsbydate" element={<ComplaintsByDate/>}/> */}
         <Route exact path="/buildingcomplaints" element={<BuildingComplaints complaints={complaints} setComplaints={setComplaints}/>}/>
         <Route exact path="/mycomplaints" element={<MyComplaints complaints={complaints} setComplaints={setComplaints}/>}/>
         <Route exact path="/filecomplaints" element={<FileComplaint complaints={complaints} setComplaints={setComplaints}/>}/>

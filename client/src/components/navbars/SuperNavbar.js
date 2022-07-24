@@ -1,16 +1,7 @@
-import { Routes, Route, NavLink } from "react-router-dom";
-import { useContext } from "react";
-import SuperComplaintsByBuilding from "../super/SuperComplaintsByBuilding";
-import AllSuperComplaints from "../super/AllSuperComplaints";
-import ComplaintsByDate from "../super/ComplaintsByDate";
-import { UserContext, } from "../UserContext";
-import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 
 function SuperNavbar(){
-  
-  const [complaints, setComplaints] = useState([])
-  
   
   return(
     <div>
@@ -18,9 +9,6 @@ function SuperNavbar(){
         <NavLink to="/allcomplaints" className="navlink">View All Complaints</NavLink>
         <NavLink to="/super/complaintsbybuilding" className="navlink">By Building</NavLink>
       </div>
-      <Routes>
-        
-      </Routes>
     </div>
   )
 }

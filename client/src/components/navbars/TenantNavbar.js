@@ -1,9 +1,9 @@
-import {Routes, Route, NavLink} from "react-router-dom";
-import { useState, useContext, useEffect } from "react";
-import { UserContext, } from "../UserContext";
+import { NavLink} from "react-router-dom";
+// import { useContext } from "react";
+// import { UserContext } from "../UserContext";
 
 function TenantNavbar(){
-  const [user] = useContext(UserContext)
+  // const [user] = useContext(UserContext)
    
   // useEffect(()=>{
   //   if(user && user.building){

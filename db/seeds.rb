@@ -29,6 +29,8 @@ eastside = Building.create(address: "330 E 74th Street", number_of_units: 14, su
 westside1 = Building.create(address: "168 W 107th Street", number_of_units: 36, super_id: alan.id, latitude: 40.800640, longitude: -73.964690)
 westside2 = Building.create(address: "425 W 57th Street", number_of_units: 124, super_id: tony.id, latitude: 40.768620, longitude: -73.986700)
 uptown = Building.create(address: "230 E 120th Street", number_of_units: 29, super_id: ramone.id, latitude: 40.806320, longitude: -73.952060)
+harlem = Building.create(address: "27 E 124th Street", number_of_units: 42, latitude: 40.80542426285995, super_id: 0, longitude: -73.94128368706039)
+uptown2 = Building.create(address: "27 W 124th Street", number_of_units: 16, latitude: 40.806629, super_id: 0, longitude: -73.9437915447317)
 
 
 #apartments

@@ -58,6 +58,12 @@ function Register(){
       }
       })
   }
+
+  function setBuildingSuper(){
+    if(building.super_id){
+      setErrors(["That building already has a super."])
+    }
+  }
   
   function handleSubmit(e){
     e.preventDefault()
@@ -108,7 +114,11 @@ function Register(){
           setFormOn(false)
         });
         setErrors(["Success! Log in above."]);
-        if(isTenant){setApartment()}
+        if(isTenant){
+          setApartment()
+        } else {
+          setBuilding()
+        }
         // navigate("/login", { replace: true })
       }
       if (!r.ok) {
@@ -133,10 +143,15 @@ function Register(){
        <div>
         {formOn ? 
           <form onSubmit={handleSubmit}>
-            <label>Select building:</label>
-            <select onChange={(e)=>setBuilding(e.target.value)}>
+            {isTenant ? 
+            <div>
+              <label>Select building:</label>
+              <select onChange={(e)=>setBuilding(e.target.value)}>
               {buildingList}
-            </select>
+              </select> 
+            </div>
+            
+            : ""}
             <div>
               <label> First Name: </label>
               <input type="text" onChange={(e)=>setFirstName(e.target.value)}></input>
