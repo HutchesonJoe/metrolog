@@ -24,11 +24,11 @@ other = Complaint.create(complaint_type: "Other")
 
 #building
 
-riverside = Building.create(address: "17 Riverside Drive", number_of_units: 42, super_id: ramone.id)
-eastside = Building.create(address: "330 E 74th Street", number_of_units: 14, super_id: alan.id)
-westside1 = Building.create(address: "168 W 107th Street", number_of_units: 36, super_id: alan.id)
-westside2 = Building.create(address: "425 W 57th Street", number_of_units: 124, super_id: tony.id)
-uptown = Building.create(address: "230 E 120th Street", number_of_units: 29, super_id: ramone.id)
+riverside = Building.create(address: "17 Riverside Drive", number_of_units: 42, super_id: ramone.id, latitude: 40.781950, longitude: -73.985000 )
+eastside = Building.create(address: "330 E 74th Street", number_of_units: 14, super_id: alan.id, latitude: 40.769430, longitude: -73.956370 )
+westside1 = Building.create(address: "168 W 107th Street", number_of_units: 36, super_id: alan.id, latitude: 40.800640, longitude: -73.964690)
+westside2 = Building.create(address: "425 W 57th Street", number_of_units: 124, super_id: tony.id, latitude: 40.768620, longitude: -73.986700)
+uptown = Building.create(address: "230 E 120th Street", number_of_units: 29, super_id: ramone.id, latitude: 40.806320, longitude: -73.952060)
 
 
 #apartments
@@ -37,6 +37,7 @@ fees_apartment = Apartment.create(building_id: riverside.id, unit_number: "24", 
 cindys_apartment = Apartment.create(building_id: westside1.id, unit_number: "14A", tenant_id: cindy.id)
 dans_apartment = Apartment.create(building_id: westside2.id, unit_number: "4C", tenant_id: dan.id)
 sonias_apartment = Apartment.create(building_id: eastside.id, unit_number: "3C", tenant_id: sonia.id)
+
 #tenant_complaints
 mold_complaint = TenantComplaint.create(tenant_id: joe.id, building_id: eastside.id, complaint_id: mold.id, resolved: false, tenant_notes: "Black mold under kitchen sink.", unit: "1B", complaint_type: "Mold")
 hot_water_complaint = TenantComplaint.create(tenant_id: fee.id, building_id: riverside.id, complaint_id: hot_water.id, resolved: false, tenant_notes: "No hot water at night, after 6pm.", unit: "24", complaint_type: "Hot Water")

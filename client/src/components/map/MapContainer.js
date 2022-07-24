@@ -1,9 +1,27 @@
 
 import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
+import { BuildingsContext } from '../BuildingsInfo';
+
+//import buildings info
+//set each building as an object as below
+//the buildings info is static, but the number of complaints is updated
+//latitude and longitude becomes part of the building info
+
 
 const MapContainer = () => {
+  const buildings = useContext(BuildingsContext)
+  useEffect(()=>{
+    if(buildings){
+      
+    }
+  },[buildings])
+  
   const[ selected, setSelected ] = useState({})
+
+  function onSelect(item){
+    setSelected(item)
+  }
   const locations =[
     {name: "Riverside",
     location: {
@@ -32,7 +50,7 @@ const MapContainer = () => {
             {
             locations.map(building=>{
               return(
-                <Marker key={building.name} position={building.location} onClick={()=>onselect(building)}/>
+                <Marker key={building.name} position={building.location} onClick={()=>onSelect(building)}/>
               )
             })
             }{

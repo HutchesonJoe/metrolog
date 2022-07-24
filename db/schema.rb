@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(version: 2022_06_29_194810) do
     t.integer "super_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.float "latitude"
+    t.float "longitude"
   end
 
   create_table "complaints", force: :cascade do |t|
