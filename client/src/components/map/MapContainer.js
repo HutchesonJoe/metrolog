@@ -13,22 +13,32 @@ const MapContainer = () => {
   const buildings = useContext(BuildingsContext)
   
   console.log(buildings)
+
   
   const[ selected, setSelected ] = useState({})
-
+  const[ locations, setLocations ] = useState([])
+  
+  useEffect(()=>{
+    if(buildings){
+      let buildingStats = []
+      buildings.map((building)=>{
+        const location = {
+          lng: building.longitude,
+          lat: building.latitude
+        }
+        const name = building.address
+        const unitCount = building.number_of_units
+        const complaintCount = building.tenant_complaints.length
+        buildingStats.push({name, location, unitCount, complaintCount})
+      })
+      setLocations(buildingStats)
+    }
+  },[buildings])
+ 
   function onSelect(item){
     setSelected(item)
   }
-  const locations =[
-    {name: "Riverside",
-    location: {
-      lat: 40.782023609130285, 
-      lng: -73.98497252935798
-    }
 
-    },
-  ]
-  
   const mapStyles = {        
     height: "100vh",
     width: "100%"};
@@ -46,8 +56,9 @@ const MapContainer = () => {
           center={defaultCenter}>
             {
             locations.map(building=>{
+              console.log(building)
               return(
-                <Marker key={building.name} position={building.location} onClick={()=>onSelect(building)}/>
+                <Marker key={building.id} position={building.location} onClick={()=>onSelect(building)}/>
               )
             })
             }{
@@ -58,7 +69,15 @@ const MapContainer = () => {
                 clickable={true}
                 onCloseClick={() => setSelected({})}
                 >
-                  <p>{selected.name}</p>
+                  <div>
+                    <ul>
+                    <h3>{selected.name}</h3>
+                    <li>{selected.unitCount} units in buildling</li>
+                    <li>{selected.complaintCount} complaints filed</li>
+                    </ul>
+                   
+                  </div>
+               
                 </InfoWindow>
               )
             }
