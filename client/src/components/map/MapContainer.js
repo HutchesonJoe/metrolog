@@ -11,11 +11,8 @@ import { BuildingsContext } from '../BuildingsInfo';
 
 const MapContainer = () => {
   const buildings = useContext(BuildingsContext)
-  useEffect(()=>{
-    if(buildings){
-      
-    }
-  },[buildings])
+  
+  console.log(buildings)
   
   const[ selected, setSelected ] = useState({})
 
