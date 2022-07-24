@@ -43,7 +43,7 @@ function ComplaintsByBuilding(){
         </select>
       </div>
       <div>
-        <Map/>
+        {/* <Map/> */}
       </div>
       <div id="building-complaints-window">
       {tenantComplaints.map((tenantComplaint)=><ComplaintCard tenantComplaint={tenantComplaint} complaintTypes={complaintTypes} key={tenantComplaint.id}/>)}
