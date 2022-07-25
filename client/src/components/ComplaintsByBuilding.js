@@ -61,9 +61,8 @@ function ComplaintsByBuilding(){
         </select>
       </div>
       <div>
-      {/* <Wrapper apiKey={"AIzaSyCGFi2GNqNUB8GDRpxe_bD3ikaXm9qqmHc"} render={render}> */}
+    
         <MapContainer/>
-      {/* </Wrapper> */}
         
       </div>
       <div id="building-complaints-window">

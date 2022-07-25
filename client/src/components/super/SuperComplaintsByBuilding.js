@@ -5,20 +5,18 @@ import { UserContext } from "../UserContext"
 
 function SuperComplaintsByBuilding(){
   const[building, setBuilding] = useState()
+  const[superBuildings, setSuperBuildings] = useState([])
   const [user] = useContext(UserContext)
 
-  let superBuildings
-  
   useEffect(()=>{
     if(user){
-      superBuildings = user.buildings
-    }
+      setSuperBuildings(user.buildings)
+    } 
   },[user])
 
   let buildingOptions
   if(superBuildings){
     buildingOptions = superBuildings.map((building)=><option key={building.id} value={building.id}>{building.address}</option>)
-
   }
  
   function handleSelect(e){

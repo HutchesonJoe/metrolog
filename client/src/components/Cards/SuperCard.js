@@ -5,27 +5,34 @@ import AssignBuilding from "../super/AssignBuilding";
 function SuperCard(){
   const [user] = useContext(UserContext)
   const [noBuildings, setNoBuildings] = useState(true)
-   
-  let buildingList
-
+  const [superBuildings, setSuperBuildings] = useState([])
+  const [buildingList, setBuildingList] = useState([])
+  
   useEffect(()=>{
     if(user.buildings){
+      setSuperBuildings(user.buildings)
       if(user.buildings.length===0){
         setNoBuildings(true)
       } else {
         setNoBuildings(false)
       }
-    buildingList = user.buildings.map((b)=>{
-    let isPlural
-    if(b.tenant_complaints.length===1){
-      isPlural = false
-    } else {
-      isPlural = true
     }
+  },[user])
+
+  useEffect(()=>{
+    if(superBuildings.length!==0){
+      const superBuildingList = superBuildings.map((b)=>{
+      let isPlural
+      if(b.tenant_complaints.length===1){
+        isPlural = false
+      } else {
+        isPlural = true
+      }
     return <li key={b.id}>{b.address}, {b.tenant_complaints.length} {isPlural ? "complaints" : "complaint"}</li>
-  })
-  }
-  },[])
+      })
+      setBuildingList(superBuildingList)
+    }
+  },[superBuildings])
   
 
   return (
@@ -34,16 +41,17 @@ function SuperCard(){
       <p>{user.first_name} {user.last_name}</p>
       <p>{user.email}, {user.phone_number}</p>
       <p>Your buildings:</p>
+      <ul>
+        {buildingList}
+      </ul>
       <div>
         {noBuildings ? "No buildings assigned to you. Select a building below." : "Add another building below."}
       </div>
       <div>
-        <AssignBuilding/>
+        <AssignBuilding superBuildings={superBuildings} setSuperBuildings={setSuperBuildings}/>
       </div>
      
-      <ul>
-        {buildingList}
-      </ul>
+    
       
     </div>
   )

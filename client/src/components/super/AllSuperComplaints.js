@@ -27,7 +27,7 @@ function AllSuperComplaints(){
   useEffect(()=>{
     if(openOnly===true){
       const open = complaints.filter((complaint)=>complaint.resolved===false)
-      console.log(open)
+    
       setAllSuperComplaints(open)
     } else {
       setAllSuperComplaints(complaints)
@@ -70,16 +70,12 @@ function AllSuperComplaints(){
       <input type="checkbox" name="open/close" onChange={()=>setOpenOnly(!openOnly)}/>
       </div>
       {complaintList}
+      <div>
+        {complaintList[0] ? "" : "No complaints of this type in this building."}
+      </div>
     </div>
   )
 }
 
 
 export default AllSuperComplaints;
-// function getComplaintInfo(e){
-      
-//   setBuildingComplaints(buildings.find((b)=>b.id===parseInt(e.target.value)).tenant_complaints);
-// }
-// buildingComplaintInfo = buildingComplaints.map((complaint)=>{
-//   return <ComplaintCard tenantComplaint={complaint}/>
-// })

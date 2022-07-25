@@ -29,7 +29,6 @@ function ComplaintCard({tenantComplaint}){
   
   useEffect(()=>{
     setComplaint(tenantComplaint);
-    // setTypeId(tenantComplaint.complaint_id)
     if(user && user.buildings){
       setIsSuper(true)
     }

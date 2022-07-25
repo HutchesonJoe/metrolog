@@ -9,7 +9,8 @@ class BuildingsController < ApplicationController
 
   def update
     building = Building.find_by(id: params[:id])
-    building.update(:super_id)
+    building.update(super_id: params[:super_id])
+    render json: building
   end
-  
+
 end

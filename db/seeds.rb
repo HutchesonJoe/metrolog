@@ -13,6 +13,7 @@ sonia = Tenant.create(first_name: "Sonia", last_name: "Marquez", email: "sonia@m
 tony = Super.create(first_name: "Antonio", last_name: "Banderas", email: "Abanderas@gmail.com", phone_number: "777-777-7777", username: "tony", password: "tony", password_confirmation: "tony")
 ramone = Super.create(first_name: "Ramone", last_name: "Olivas", email: "rolivas@gmail.com", phone_number: "222-222-2222", username: "ramone", password: "ramone", password_confirmation: "ramone")
 alan = Super.create(first_name: "Alan", last_name: "Smith", email: "asmith@yomama.com", phone_number: "765-656-8989", username: "alan", password: "alan", password_confirmation: "alan")
+noSuper = Super.create(first_name: "nosuper", last_name: "nosuper", password: "nosuper", password_confirmation: "nosuper", username: "nosuper", email: "none", phone_number: "none", password_confirmation: "nosuper")
 
 #complaints
 
@@ -29,8 +30,8 @@ eastside = Building.create(address: "330 E 74th Street", number_of_units: 14, su
 westside1 = Building.create(address: "168 W 107th Street", number_of_units: 36, super_id: alan.id, latitude: 40.800640, longitude: -73.964690)
 westside2 = Building.create(address: "425 W 57th Street", number_of_units: 124, super_id: tony.id, latitude: 40.768620, longitude: -73.986700)
 uptown = Building.create(address: "230 E 120th Street", number_of_units: 29, super_id: ramone.id, latitude: 40.806320, longitude: -73.952060)
-harlem = Building.create(address: "27 E 124th Street", number_of_units: 42, latitude: 40.80542426285995, super_id: 0, longitude: -73.94128368706039)
-uptown2 = Building.create(address: "27 W 124th Street", number_of_units: 16, latitude: 40.806629, super_id: 0, longitude: -73.9437915447317)
+harlem = Building.create(address: "27 E 124th Street", number_of_units: 42, super_id: noSuper.id, latitude: 40.80542426285995, longitude: -73.94128368706039)
+uptown2 = Building.create(address: "27 W 124th Street", number_of_units: 16, super_id: noSuper.id, latitude: 40.806629, longitude: -73.9437915447317)
 
 
 #apartments

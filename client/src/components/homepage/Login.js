@@ -13,7 +13,7 @@ function Login({setUser}){
   function handleLogin(e){
     e.preventDefault()
     const user = {username, password, isSuper}
-    console.log(user)
+    
     fetch("/login", {
       method: "POST",
       headers: {
@@ -23,7 +23,7 @@ function Login({setUser}){
     }).then((r)=> {
       if (r.ok) {
         r.json().then((user) => setUser(user));
-        navigate("/home", { replace: true })
+        navigate(-1, { replace: true })
       } else {
         r.json().then((err) => {
           setErrors(err.errors);

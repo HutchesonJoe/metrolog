@@ -64,7 +64,6 @@ const navigate = useNavigate()
 
 
   return(
-
     <div id="home">
 
       {user 
@@ -90,7 +89,7 @@ const navigate = useNavigate()
         <Route exact path="/login" element={<Login setUser={setUser}/>}/>
         <Route exact path="/register" element={<Register/>}/>
         <Route exact path="/complaintsbybuilding" element={<ComplaintsByBuilding/>}/>
-        <Route exact path="/homepage/home" element={<Home/>}/>
+        {/* <Route exact path="/" element={<Home/>}/> */}
         <Route path="/allcomplaints" element={<AllSuperComplaints complaints={complaints} setComplaints={setComplaints}/>}/>
         <Route path="/super/complaintsbybuilding" element={<SuperComplaintsByBuilding />}/>
         
