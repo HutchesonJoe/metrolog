@@ -1,17 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Errors from "../Errors";
 
-function Login({setUser}){
+function Login({setUser, setNewRegistration}){
   const[username, setUsername] = useState("")
   const[password, setPassword] = useState("");
   const[isSuper, setIsSuper] = useState(false)
   const[errors, setErrors] = useState([]);
 
+  useEffect(()=>{
+    setNewRegistration(false)
+  },[])
+
   const navigate = useNavigate()
 
   function handleLogin(e){
     e.preventDefault()
+    
     const user = {username, password, isSuper}
     
     fetch("/login", {

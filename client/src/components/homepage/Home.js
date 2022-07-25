@@ -20,6 +20,7 @@ function Home(){
 const [user, setUser] = useContext(UserContext)
 const [complaints, setComplaints] = useContext(TenantComplaintContext)
 const [isSuper, setIsSuper] = useState()
+const [newRegistration, setNewRegistration] = useState(false)
 
 const navigate = useNavigate()
 
@@ -65,7 +66,10 @@ const navigate = useNavigate()
 
   return(
     <div id="home">
-
+      <div>
+        {newRegistration ? "Success! Please log in." : ""}
+      </div>
+      
       {user 
         ? 
         <div>
@@ -86,10 +90,10 @@ const navigate = useNavigate()
       }
       
       <Routes>
-        <Route exact path="/login" element={<Login setUser={setUser}/>}/>
-        <Route exact path="/register" element={<Register/>}/>
+        <Route exact path="/login" element={<Login setUser={setUser} setNewRegistration={setNewRegistration}/>}/>
+        <Route exact path="/register" element={<Register setNewRegistration={setNewRegistration}/>}/>
         <Route exact path="/complaintsbybuilding" element={<ComplaintsByBuilding/>}/>
-        {/* <Route exact path="/" element={<Home/>}/> */}
+        <Route exact path="/home" element={<Home/>}/>
         <Route path="/allcomplaints" element={<AllSuperComplaints complaints={complaints} setComplaints={setComplaints}/>}/>
         <Route path="/super/complaintsbybuilding" element={<SuperComplaintsByBuilding />}/>
         

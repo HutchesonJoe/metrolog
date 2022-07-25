@@ -1,8 +1,9 @@
 import { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { BuildingsContext } from "../BuildingsInfo"
 import Errors from '../Errors';
 
-function Register(){
+function Register({setNewRegistration}){
   const[isTenant, setIsTenant] = useState(true)
   const[formOn, setFormOn] = useState(false)
   const[errors, setErrors] = useState()
@@ -11,15 +12,14 @@ function Register(){
   const[lastName, setLastName] = useState("")
   const[email, setEmail] = useState("")
   const[phoneNumber, setPhoneNumber] = useState("")
-  const[unit, setUnit] = useState("")
   const[additionalTenants, sestAdditionalTenants] = useState("")
-  const[building, setBuilding] = useState(1)
   const[username, setUsername] = useState("")
   const[password, setPassword] = useState("")
   const[passwordConfirmation, setPasswordConfirmation] = useState("")
 
   const buildings = useContext(BuildingsContext)
   
+  const navigate = useNavigate()
 
   const buildingList = buildings.map((building)=><option key={building.id} value={building.id}>{building.address}</option>)
 
@@ -36,39 +36,11 @@ function Register(){
     }
   }
 
-  function setApartment(){
-    const apartment = {
-      building_id: building,
-      unit_number: unit,
-      tenant_id: tenantId
-    }
-
-    fetch("/apartments",{
-      method: "POST",
-      headers: {
-        "Content-Type" : "application/json",
-      },
-      body: JSON.stringify(apartment)
-    }).then((r) => {
-      if (r.ok) {
-        r.json().then(()=>setErrors(["Success! Log in above."]))
-      }
-      if (!r.ok) {
-        r.json().then((err) => setErrors(err.errors))
-      }
-      })
-  }
-
-  function setBuildingSuper(){
-    if(building.super_id){
-      setErrors(["That building already has a super."])
-    }
-  }
+  
   
   function handleSubmit(e){
     e.preventDefault()
     
-
     let targetRoute
     let user
 
@@ -108,24 +80,19 @@ function Register(){
     .then((r) => {
       if (r.ok) {
         r.json().then((data)=>{
+          setNewRegistration(false)
+          //am I useing this?
           if(isTenant){
             setTenantId(data.id)
           }
           setFormOn(false)
         });
-        setErrors(["Success! Log in above."]);
-        if(isTenant){
-          setApartment()
-        } else {
-          setBuilding()
-        }
-        // navigate("/login", { replace: true })
       }
       if (!r.ok) {
         r.json().then((err) => setErrors(err.errors))
       }
     });
-    
+    navigate("/login", {replace : true})
   }
     
   return(
@@ -143,7 +110,7 @@ function Register(){
        <div>
         {formOn ? 
           <form onSubmit={handleSubmit}>
-            {isTenant ? 
+            {/* {isTenant ? 
             <div>
               <label>Select building:</label>
               <select onChange={(e)=>setBuilding(e.target.value)}>
@@ -151,7 +118,7 @@ function Register(){
               </select> 
             </div>
             
-            : ""}
+            : ""} */}
             <div>
               <label> First Name: </label>
               <input type="text" onChange={(e)=>setFirstName(e.target.value)}></input>
@@ -182,10 +149,7 @@ function Register(){
             </div>
           {isTenant ? 
             <div>
-              <div>
-                <label>Unit Number:</label>
-                <input type="text" onChange={(e)=>setUnit(e.target.value)}></input>
-              </div>
+
               <div>
                 <label>Additional Tenant (full name; if multiple, separate with commas):</label>
                 <input type="text" onChange={(e)=>sestAdditionalTenants(e.target.value)}></input>
