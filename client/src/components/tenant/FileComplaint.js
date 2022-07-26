@@ -85,7 +85,7 @@ function FileComplaint({complaints, setComplaints}){
             </select>
           </div>
           <div>
-            <textarea placeholder="Enter notes here..." onChange={((e)=>setTenantNotes(e.target.value))}></textarea>
+            <textarea rows="10" cols="30" placeholder="Enter notes here..." onChange={((e)=>setTenantNotes(e.target.value))}></textarea>
           </div>
         <button type="submit">Submit</button>
     </form>

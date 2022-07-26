@@ -7,7 +7,7 @@ function Login({setUser}){
   const[password, setPassword] = useState("");
   const[isSuper, setIsSuper] = useState(false)
   const[errors, setErrors] = useState([]);
-  // const [user, setUser] = useContext(UserContext)
+  
 
   function handleLogin(e){
     e.preventDefault()
