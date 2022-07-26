@@ -1,6 +1,4 @@
-import { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { BuildingsContext } from "./BuildingsInfo";
+import { useState } from 'react';
 import Errors from './Errors';
 
 function Register(){

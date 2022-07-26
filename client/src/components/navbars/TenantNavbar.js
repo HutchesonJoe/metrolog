@@ -1,15 +1,6 @@
 import { NavLink} from "react-router-dom";
-// import { useContext } from "react";
-// import { UserContext } from "../UserContext";
 
 function TenantNavbar(){
-  // const [user] = useContext(UserContext)
-   
-  // useEffect(()=>{
-  //   if(user && user.building){
-  //     setComplaints(user.building.tenant_complaints)
-  //   }
-  // },[user])
 
   return(
     <div>

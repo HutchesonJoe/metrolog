@@ -1,6 +1,5 @@
-import { useState, useEffect, useContext } from "react";
-import { UserContext } from "./UserContext";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
 import Errors from "./Errors";
 
 function Login({setUser}){

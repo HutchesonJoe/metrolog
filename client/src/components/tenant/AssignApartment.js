@@ -1,5 +1,4 @@
 import { useEffect, useState, useContext } from 'react';
-import { useNavigate } from "react-router-dom"
 import { BuildingsContext } from '../BuildingsInfo';
 import { UserContext } from '../UserContext';
 import Errors from '../Errors';
@@ -10,8 +9,6 @@ function AssignApartment({setApartment}){
   const[building, setBuilding] = useState()
   const[unit, setUnit] = useState()
   const[errors, setErrors] = useState([])
-  
-  const navigate = useNavigate()
 
   useEffect(()=>{
     if(buildings.length!==0){

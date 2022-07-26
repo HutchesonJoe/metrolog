@@ -6,7 +6,7 @@ function MyComplaints({complaints, setComplaints}){
   const[myComplaints, setMyComplaints] = useState([])
 
   const [user] = useContext(UserContext)
-  console.log(user)
+
   useEffect(()=>{
     if(user && user.apartment){
       const filteredComplaints = complaints.filter((complaint)=>complaint.tenant_id===user.id)

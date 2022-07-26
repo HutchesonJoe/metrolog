@@ -1,15 +1,12 @@
-import { NavLink } from 'react-router-dom'
+import skyline from '../images/nycskyyline.png'
 
 function Banner(){
   return (
-    <div>
-      <NavLink to="/">
-      <h1 className="App-header">
-            METROLog
-          </h1>
-      </NavLink>
-          
-
+    <div id="App-header">
+     
+      <h1>METRONYC Properties <img src={skyline} alt= "skyline logo" id="logo"/></h1>
+      
+      <h3>Tenant Complaint Log</h3>
     </div>
    
 

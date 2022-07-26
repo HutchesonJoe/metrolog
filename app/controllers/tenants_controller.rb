@@ -12,7 +12,7 @@ class TenantsController < ApplicationController
   def create
     tenant = Tenant.create!(tenant_params)
     render json: tenant, status: :created
-  rescue render_unprocessable
+
   end
 
   def show
@@ -28,10 +28,6 @@ class TenantsController < ApplicationController
 
   def render_invalid_response(invalid)
    render json: { errors: invalid.record.errors.full_messages }, status: 422
-  end
-
-  def render_unprocessable
-    render json: { errors: ["Oops! Something went wrong. Try again."]}
   end
 
 end

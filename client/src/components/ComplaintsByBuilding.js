@@ -3,8 +3,6 @@ import ComplaintCard from "./Cards/ComplaintCard";
 import { BuildingsContext } from "./BuildingsInfo";
 // import { Wrapper, Status } from "@googlemaps/react-wrapper"
 import MapContainer from "./map/MapContainer"
-import Loading from "./map/Loading"
-import MapError from "./map/MapError";
 
 function ComplaintsByBuilding(){
 
@@ -14,21 +12,6 @@ function ComplaintsByBuilding(){
   const[complaintTypes, setComplaintTypes] = useState([])
   const[noComplaints, setNoComplaints] = useState(false)
 
-  //google map stuff
-
-  // const render = (status) =>{
-  //   switch (status) {
-  //     case Status.LOADING:
-  //       return <Loading/>
-  //     case Status.FAILURE:
-  //       return <MapError />;
-  //   case Status.SUCCESS:
-  //       return <MapContainer />;
-  //   }
-  // }
-
-  //google map stuff ^^^
-  
   useEffect(()=>{
     fetch("./complaints")
       .then(r=>r.json())

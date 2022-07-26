@@ -1,4 +1,3 @@
-// import { format } from 'date-fns'
 import { useContext, useState, useEffect } from "react";
 import { ComplaintTypesContext } from "../ComplaintTypesInfo";
 import { BuildingsContext } from "../BuildingsInfo";
@@ -9,7 +8,7 @@ import Errors from "../Errors"
 
 
 function ComplaintCard({tenantComplaint}){
-  // console.log(tenantComplaint)
+  
   const createdAt = new Date(tenantComplaint.created_at)
   const updatedAt = new Date(tenantComplaint.updated_at)
   const now = new Date()
@@ -44,13 +43,13 @@ function ComplaintCard({tenantComplaint}){
     building = buildings.find(building=>building.id===tenantComplaint.building_id)
   }
 
-  let complaintType
+  // let complaintType
   
-  if(complaint){
+  // if(complaint){
  
-    complaintType = complaintTypes.find(c=>c.id===tenantComplaint.complaint_id)
+  //   complaintType = complaintTypes.find(c=>c.id===tenantComplaint.complaint_id)
 
-  }
+  // }
 
   
   function handleClick(){

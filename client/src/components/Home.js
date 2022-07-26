@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from "react";
-import { NavLink, Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import ComplaintsByBuilding from "./ComplaintsByBuilding";
 import TenantCard from "./Cards/TenantCard";
 import SuperCard from "./Cards/SuperCard";
@@ -12,21 +12,20 @@ import SuperComplaintsByBuilding from "./super/SuperComplaintsByBuilding";
 import BuildingComplaints from "./tenant/BuildingComplaints";
 import MyComplaints from "./tenant/MyComplaints";
 import FileComplaint from "./tenant/FileComplaint";
-import App from "./App";
 
-function Home({isSuper}){
+function Home(){
 
 const [user, setUser] = useContext(UserContext)
 const [complaints, setComplaints] = useContext(TenantComplaintContext)
-// const [isSuper, setIsSuper] = useState()
-console.log(user, isSuper)
-  // useEffect(()=>{
-  //   if(user && user.buildings){
-  //     setIsSuper(true)
-  //   } else {
-  //     setIsSuper(false)
-  //   }
-  // },[user])
+const [isSuper, setIsSuper] = useState()
+
+useEffect(()=>{
+    if(user && user.buildings){
+      setIsSuper(true)
+    } else {
+      setIsSuper(false)
+    }
+  },[user])
 
 
   useEffect(()=>{
@@ -51,12 +50,10 @@ console.log(user, isSuper)
   return(
     <div id="home">
         <div>
-          {user ? <p>Welcome, {user.first_name} <button onClick={handleLogout}>Logout</button></p> : ""}
+          {user ? <p id="welcome">Welcome, {user.first_name} <button onClick={handleLogout}>Logout</button></p> : ""}
           {isSuper ? <SuperCard/> : <TenantCard/>}
           {isSuper ? <SuperNavbar/> : <TenantNavbar/>}
         </div>
-   
-  
       
       <Routes>
         <Route exact path="/home" element={<Home/>}/>

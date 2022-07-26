@@ -37,7 +37,7 @@ function SuperCard(){
   if(user){
   return (
     
-    <div>
+    <div id="tenant-super-card">
       <h4>Super Information:</h4>
       <p>{user.first_name} {user.last_name}</p>
       <p>{user.email}, {user.phone_number}</p>

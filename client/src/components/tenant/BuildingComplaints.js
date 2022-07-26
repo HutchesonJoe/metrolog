@@ -1,11 +1,11 @@
-import { useState, useEffect, useContext } from "react";
-import { UserContext } from "../UserContext"
+import { useContext } from "react";
+// import { UserContext } from "../UserContext"
 import ComplaintCard from "../Cards/ComplaintCard"
 import { TenantComplaintContext} from "../TenantComplaintsContext"
 
 function BuildingComplaints(){
   
-  const [user] = useContext(UserContext)
+  // const [user] = useContext(UserContext)
   const [ complaints, setComplaints ]= useContext(TenantComplaintContext)
 
   let tenantBuildingComplaints 

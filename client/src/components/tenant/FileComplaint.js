@@ -1,12 +1,21 @@
 import { useState, useContext, useEffect } from "react"
 import { UserContext } from "../UserContext"
-import { TenantComplaintContext } from "../TenantComplaintsContext"
 import { ComplaintTypesContext } from "../ComplaintTypesInfo"
 import Errors from "../Errors"
 
 function FileComplaint({complaints, setComplaints}){
-  const [user] = useContext(UserContext)
-  console.log(user)
+  const [user, setUser] = useContext(UserContext)
+
+  useEffect(()=>{
+    fetch("/me").then((r)=>{
+      if (r.ok){
+        r.json().then((me)=>{
+          setUser(me);
+        })
+      }
+    })
+  },[])
+
   const complaintTypes = useContext(ComplaintTypesContext)
   const[complaintType, setComplaintType] = useState()
   const[complaintTypeId, setComplaintTypeId] = useState()
@@ -76,7 +85,7 @@ function FileComplaint({complaints, setComplaints}){
             </select>
           </div>
           <div>
-            <textarea onChange={((e)=>setTenantNotes(e.target.value))}></textarea>
+            <textarea placeholder="Enter notes here..." onChange={((e)=>setTenantNotes(e.target.value))}></textarea>
           </div>
         <button type="submit">Submit</button>
     </form>
