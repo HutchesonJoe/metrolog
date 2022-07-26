@@ -1,5 +1,7 @@
 class TenantsController < ApplicationController
   rescue_from ActiveRecord::RecordInvalid, with: :render_invalid_response
+  # rescue_from ActiveRecord::UnprocessableEntity, with: :render_unprocessable
+
   skip_before_action :authorized, only: [:create, :index]
   
   def index
@@ -10,6 +12,7 @@ class TenantsController < ApplicationController
   def create
     tenant = Tenant.create!(tenant_params)
     render json: tenant, status: :created
+  rescue render_unprocessable
   end
 
   def show
@@ -26,5 +29,9 @@ class TenantsController < ApplicationController
   def render_invalid_response(invalid)
    render json: { errors: invalid.record.errors.full_messages }, status: 422
   end
-  
+
+  def render_unprocessable
+    render json: { errors: ["Oops! Something went wrong. Try again."]}
+  end
+
 end

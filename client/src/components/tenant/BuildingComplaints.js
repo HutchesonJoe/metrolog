@@ -6,22 +6,7 @@ import { TenantComplaintContext} from "../TenantComplaintsContext"
 function BuildingComplaints(){
   
   const [user] = useContext(UserContext)
-  const [complaints, setComplaints ]= useContext(TenantComplaintContext)
-  console.log(complaints)
-  // const [buildingComplaints, setBuildingComplaints] = useState([])
-  
-  // useEffect(()=>{
-  //   console.log(user)
-  //   if(user && user.building){
-  //     setComplaints(user.building.tenant_complaints)
-  //   }
-      
-  // },[user])
-
-  // useEffect(()=>{
-  //   setBuildingComplaints(complaints)
-  // },[complaints])
-
+  const [ complaints, setComplaints ]= useContext(TenantComplaintContext)
 
   let tenantBuildingComplaints 
 

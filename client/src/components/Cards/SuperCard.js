@@ -9,7 +9,7 @@ function SuperCard(){
   const [buildingList, setBuildingList] = useState([])
   
   useEffect(()=>{
-    if(user.buildings){
+    if(user && user.buildings){
       setSuperBuildings(user.buildings)
       if(user.buildings.length===0){
         setNoBuildings(true)
@@ -34,8 +34,9 @@ function SuperCard(){
     }
   },[superBuildings])
   
-
+  if(user){
   return (
+    
     <div>
       <h4>Super Information:</h4>
       <p>{user.first_name} {user.last_name}</p>
@@ -50,11 +51,13 @@ function SuperCard(){
       <div>
         <AssignBuilding superBuildings={superBuildings} setSuperBuildings={setSuperBuildings}/>
       </div>
-     
-    
-      
     </div>
   )
+  } else {
+    return(
+      <div></div>
+    )
+  }
 }
 
 export default SuperCard;

@@ -1,26 +1,23 @@
 import { useEffect, useState, useContext } from 'react';
+import { useNavigate } from "react-router-dom"
 import { BuildingsContext } from '../BuildingsInfo';
 import { UserContext } from '../UserContext';
 import Errors from '../Errors';
 
-function AssignApartment({setApartmentRegistered}){
+function AssignApartment({setApartment}){
   const buildings = useContext(BuildingsContext)
-  const [user] = useContext(UserContext)
+  const [user, setUser] = useContext(UserContext)
   const[building, setBuilding] = useState()
   const[unit, setUnit] = useState()
   const[errors, setErrors] = useState([])
   
+  const navigate = useNavigate()
+
   useEffect(()=>{
     if(buildings.length!==0){
       setBuilding(buildings[0].address)
     }
   },[buildings])
-
-  // useEffect(()=>{
-  //   if(user){
-  //     setTenantId(user.id)
-  //   }
-  // },[user])
 
   const buildingOptions = buildings.map((building)=><option key={building.id}>{building.address}</option>)
 
@@ -33,7 +30,6 @@ function AssignApartment({setApartmentRegistered}){
       tenant_id: user.id
     }
 
-    console.log(apartment)
     fetch("/apartments",{
       method: "POST",
       headers: {
@@ -41,11 +37,13 @@ function AssignApartment({setApartmentRegistered}){
       },
       body: JSON.stringify(apartment)
     }).then((r) => {
-      if (r.ok) {
-        r.json().then(()=>setApartmentRegistered(true))
-      }
       if (!r.ok) {
         r.json().then((err) => setErrors(err.errors))
+      } else {
+        r.json().then(data=>{
+          setApartment(data);
+          setUser(data.tenant)
+        })
       }
       })
     

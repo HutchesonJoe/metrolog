@@ -1,18 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { UserContext } from "./UserContext";
 import { useNavigate } from "react-router-dom";
-import Errors from "../Errors";
+import Errors from "./Errors";
 
-function Login({setUser, setNewRegistration}){
+function Login({setUser}){
   const[username, setUsername] = useState("")
   const[password, setPassword] = useState("");
   const[isSuper, setIsSuper] = useState(false)
   const[errors, setErrors] = useState([]);
-
-  useEffect(()=>{
-    setNewRegistration(false)
-  },[])
-
-  const navigate = useNavigate()
+  // const [user, setUser] = useContext(UserContext)
 
   function handleLogin(e){
     e.preventDefault()
@@ -28,7 +24,6 @@ function Login({setUser, setNewRegistration}){
     }).then((r)=> {
       if (r.ok) {
         r.json().then((user) => setUser(user));
-        navigate(-1, { replace: true })
       } else {
         r.json().then((err) => {
           setErrors(err.errors);

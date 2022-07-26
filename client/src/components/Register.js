@@ -1,13 +1,12 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BuildingsContext } from "../BuildingsInfo"
-import Errors from '../Errors';
+import { BuildingsContext } from "./BuildingsInfo";
+import Errors from './Errors';
 
-function Register({setNewRegistration}){
+function Register(){
   const[isTenant, setIsTenant] = useState(true)
   const[formOn, setFormOn] = useState(false)
   const[errors, setErrors] = useState()
-  const[tenantId, setTenantId] = useState()
   const[firstName, setFirstName] = useState("")
   const[lastName, setLastName] = useState("")
   const[email, setEmail] = useState("")
@@ -16,12 +15,6 @@ function Register({setNewRegistration}){
   const[username, setUsername] = useState("")
   const[password, setPassword] = useState("")
   const[passwordConfirmation, setPasswordConfirmation] = useState("")
-
-  const buildings = useContext(BuildingsContext)
-  
-  const navigate = useNavigate()
-
-  const buildingList = buildings.map((building)=><option key={building.id} value={building.id}>{building.address}</option>)
 
   function handleSelectUserType(e){
     setErrors([])
@@ -36,8 +29,6 @@ function Register({setNewRegistration}){
     }
   }
 
-  
-  
   function handleSubmit(e){
     e.preventDefault()
     
@@ -80,19 +71,18 @@ function Register({setNewRegistration}){
     .then((r) => {
       if (r.ok) {
         r.json().then((data)=>{
-          setNewRegistration(false)
+          // setNewRegistration(false)
           //am I useing this?
-          if(isTenant){
-            setTenantId(data.id)
-          }
-          setFormOn(false)
+          // if(isTenant){
+          //   setTenantId(data.id)
+          // }
+          setErrors(["Success! Please log in."])
         });
       }
       if (!r.ok) {
         r.json().then((err) => setErrors(err.errors))
       }
     });
-    navigate("/login", {replace : true})
   }
     
   return(
@@ -106,19 +96,11 @@ function Register({setNewRegistration}){
         <option value={"super"}>Superintendent</option>
       </select>
       </div>
-            
+     
        <div>
         {formOn ? 
           <form onSubmit={handleSubmit}>
-            {/* {isTenant ? 
-            <div>
-              <label>Select building:</label>
-              <select onChange={(e)=>setBuilding(e.target.value)}>
-              {buildingList}
-              </select> 
-            </div>
-            
-            : ""} */}
+
             <div>
               <label> First Name: </label>
               <input type="text" onChange={(e)=>setFirstName(e.target.value)}></input>
@@ -154,8 +136,6 @@ function Register({setNewRegistration}){
                 <label>Additional Tenant (full name; if multiple, separate with commas):</label>
                 <input type="text" onChange={(e)=>sestAdditionalTenants(e.target.value)}></input>
               </div>
-              
-
             </div>
            
             : 

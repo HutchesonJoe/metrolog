@@ -6,7 +6,7 @@ import Errors from "../Errors"
 
 function FileComplaint({complaints, setComplaints}){
   const [user] = useContext(UserContext)
-  // const [complaints, setComplaints] = useContext(TenantComplaintContext)
+  console.log(user)
   const complaintTypes = useContext(ComplaintTypesContext)
   const[complaintType, setComplaintType] = useState()
   const[complaintTypeId, setComplaintTypeId] = useState()
