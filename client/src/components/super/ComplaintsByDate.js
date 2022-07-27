@@ -2,9 +2,9 @@ import { useState, useEffect, useContext } from "react";
 import ComplaintCard from "../Cards/ComplaintCard";
 import { TenantComplaintContext } from "../TenantComplaintsContext"
 
-function ComplaintsByDate(){
-  const[complaints, setComplaints] = useContext(TenantComplaintContext)
-  const[filter, setFilter] = useState("/by-date")
+function ComplaintsByDate({complaints, setComplaints}){
+  // const[complaints, setComplaints] = useContext(TenantComplaintContext)
+  // const[filter, setFilter] = useState("/by-date")
   console.log(complaints)
 
   // useEffect(()=>{
@@ -22,7 +22,7 @@ function ComplaintsByDate(){
   let complaintList
 
   if(complaints){
-    complaintList = complaints.map((complaint)=><ComplaintCard key={complaint.id} tenantComplaint={complaint}/>)
+    complaintList = complaints.map((complaint)=><ComplaintCard key={complaint.id} tenantComplaint={complaint} complaints={complaints} setComplaints={setComplaints}/>)
   }
   
   return(

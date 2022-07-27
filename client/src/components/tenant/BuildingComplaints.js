@@ -1,18 +1,19 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect , useState} from "react";
 import { UserContext } from "../UserContext"
 import ComplaintCard from "../Cards/ComplaintCard"
 import { TenantComplaintContext } from "../TenantComplaintsContext"
 
-function BuildingComplaints(){
+function BuildingComplaints({complaints, setComplaints}){
   
   const [user] = useContext(UserContext)
-  const [ complaints, setComplaints ]= useContext(TenantComplaintContext)
+  // const [ complaints, setComplaints ]= useContext(TenantComplaintContext)
   
-  useEffect(()=>{
-    if(user && user.building){
-      setComplaints(user.building.tenant_complaints)
-    }
-  },[user])
+
+  // useEffect(()=>{
+  //   if(user && user.building){
+  //     setComplaints(user.building.tenant_complaints)
+  //   }
+  // },[complaints])
 
   let tenantBuildingComplaints 
 

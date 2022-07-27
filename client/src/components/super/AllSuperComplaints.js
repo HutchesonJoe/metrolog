@@ -4,9 +4,9 @@ import ComplaintCard from "../Cards/ComplaintCard";
 import { UserContext } from "../UserContext";
 import { TenantComplaintContext } from "../TenantComplaintsContext"
 
-function AllSuperComplaints(){
+function AllSuperComplaints({complaints, setComplaints}){
   const [user] = useContext(UserContext)
-  const [complaints, setComplaints] = useContext(TenantComplaintContext)
+  // const [complaints, setComplaints] = useContext(TenantComplaintContext)
   const types = useContext(ComplaintTypesContext)
 
   const [typeId, setTypeId] = useState()
@@ -48,7 +48,7 @@ function AllSuperComplaints(){
     if(typeId){
       filteredComplaints = allSuperComplaints.filter((complaint)=>complaint.complaint_id===parseInt(typeId))
     }
-    complaintList = filteredComplaints.map((complaint)=><ComplaintCard tenantComplaint={complaint} key={complaint.id}/>)
+    complaintList = filteredComplaints.map((complaint)=><ComplaintCard tenantComplaint={complaint} key={complaint.id} complaints={complaints} setComplaints={setComplaints}/>)
   }
 
   function selectType(e){

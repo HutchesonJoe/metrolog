@@ -7,7 +7,7 @@ import EditComplaint from "../EditComplaint";
 import Errors from "../Errors"
 
 
-function ComplaintCard({tenantComplaint}){
+function ComplaintCard({tenantComplaint, complaints, setComplaints}){
   
   const createdAt = new Date(tenantComplaint.created_at)
   const updatedAt = new Date(tenantComplaint.updated_at)
@@ -20,8 +20,8 @@ function ComplaintCard({tenantComplaint}){
   const[isSuper, setIsSuper] = useState(false)
   const[compStatus, setCompStatus] = useState()
   
-  const complaintTypes = useContext(ComplaintTypesContext)
-  const [complaints, setComplaints] = useContext(TenantComplaintContext)
+  // const complaintTypes = useContext(ComplaintTypesContext)
+  // const [complaints, setComplaints] = useContext(TenantComplaintContext)
   const buildings = useContext(BuildingsContext)
   const [user] = useContext(UserContext)
 
@@ -43,15 +43,6 @@ function ComplaintCard({tenantComplaint}){
     building = buildings.find(building=>building.id===tenantComplaint.building_id)
   }
 
-  // let complaintType
-  
-  // if(complaint){
- 
-  //   complaintType = complaintTypes.find(c=>c.id===tenantComplaint.complaint_id)
-
-  // }
-
-  
   function handleClick(){
     setErrors([])
     if(!user){

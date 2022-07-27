@@ -12,7 +12,7 @@ function MyComplaints({complaints, setComplaints}){
       const filteredComplaints = complaints.filter((complaint)=>complaint.tenant_id===user.id)
       setMyComplaints(filteredComplaints)
     }
-  },[user])
+  },[complaints])
   
   let myComplaintList
 

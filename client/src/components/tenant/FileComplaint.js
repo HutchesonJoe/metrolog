@@ -2,9 +2,11 @@ import { useState, useContext, useEffect } from "react"
 import { UserContext } from "../UserContext"
 import { ComplaintTypesContext } from "../ComplaintTypesInfo"
 import Errors from "../Errors"
+import { TenantComplaintContext } from "../TenantComplaintsContext"
 
 function FileComplaint({complaints, setComplaints}){
   const [user, setUser] = useContext(UserContext)
+  // const [complaints, setComplaints] = useContext(TenantComplaintContext)
 
   useEffect(()=>{
     fetch("/me").then((r)=>{
@@ -22,7 +24,7 @@ function FileComplaint({complaints, setComplaints}){
   const[tenantNotes, setTenantNotes] = useState("")
   const[submitOn, setSubmitOn] = useState(true)
   const[errors, setErrors] = useState([])
-  console.log(complaints, setComplaints)
+
   useEffect(()=>{
     if(complaintTypes.length!==0){
     setComplaintType(complaintTypes[0].complaint_type)
@@ -60,7 +62,6 @@ function FileComplaint({complaints, setComplaints}){
     }).then((r) => {
       if (r.ok) {
         r.json().then((data)=>{
-          console.log(data)
           setComplaints([...complaints, data])
           setErrors(["Your complaint has been logged."]);
           

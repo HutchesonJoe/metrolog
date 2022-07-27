@@ -16,7 +16,8 @@ import FileComplaint from "./tenant/FileComplaint";
 function Home(){
 
 const [user, setUser] = useContext(UserContext)
-const [complaints, setComplaints] = useContext(TenantComplaintContext)
+// const []
+const [complaints, setComplaints] = useState([])
 const [isSuper, setIsSuper] = useState()
 
 useEffect(()=>{
@@ -59,7 +60,7 @@ useEffect(()=>{
         <Route exact path="/home" element={<Home/>}/>
         {/* <Route exact path="/complaintsbybuilding" element={<ComplaintsByBuilding/>}/> */}
         <Route path="/allcomplaints" element={<AllSuperComplaints complaints={complaints} setComplaints={setComplaints}/>}/>
-        <Route path="/super/complaintsbybuilding" element={<SuperComplaintsByBuilding />}/>
+        <Route path="/super/complaintsbybuilding" element={<SuperComplaintsByBuilding complaints={complaints} setComplaints={setComplaints}/>}/>
         
         <Route exact path="/buildingcomplaints" element={<BuildingComplaints complaints={complaints} setComplaints={setComplaints}/>}/>
         <Route exact path="/mycomplaints" element={<MyComplaints complaints={complaints} setComplaints={setComplaints}/>}/>
