@@ -1,11 +1,13 @@
 import { useEffect, useState, useContext } from 'react';
 import { BuildingsContext } from '../BuildingsInfo';
+import { TenantComplaintContext } from '../TenantComplaintsContext';
 import { UserContext } from '../UserContext';
 import Errors from '../Errors';
 
 function AssignApartment({setApartment}){
   const buildings = useContext(BuildingsContext)
   const [user, setUser] = useContext(UserContext)
+  const [ complaints, setComplaints ] = useContext(TenantComplaintContext)
   const[building, setBuilding] = useState()
   const[unit, setUnit] = useState()
   const[errors, setErrors] = useState([])
@@ -26,6 +28,8 @@ function AssignApartment({setApartment}){
       unit_number: unit,
       tenant_id: user.id
     }
+
+    setComplaints(thisBuilding.tenant_complaints)
 
     fetch("/apartments",{
       method: "POST",
