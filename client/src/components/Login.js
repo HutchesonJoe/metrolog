@@ -27,6 +27,8 @@ function Login({setUser}){
         r.json().then((err) => {
           setErrors(err.errors);
           setUser(null);
+          setUsername("");
+          setPassword("")
         })
       }
     })
@@ -46,11 +48,11 @@ function Login({setUser}){
         </div>
         <div>
           <label>Username: </label>
-          <input type="text" onChange={(e)=>setUsername(e.target.value)}></input>
+          <input type="text" onChange={(e)=>setUsername(e.target.value)} value={username}></input>
         </div>
         <div>
           <label>Password: </label>
-          <input type="password" onChange={(e)=>setPassword(e.target.value)}></input>
+          <input type="password" onChange={(e)=>setPassword(e.target.value)} value={password}></input>
         </div>
         <div>
           <button type="submit">Submit</button>

@@ -17,7 +17,6 @@ function MyComplaints({complaints, setComplaints}){
   let myComplaintList
 
   if(user && user.apartment){
-    console.log(complaints)
     myComplaintList = myComplaints.map((complaint)=>{
       return <ComplaintCard tenantComplaint={complaint} key={complaint.id} setComplaints={setComplaints} complaints={complaints}/>
     })

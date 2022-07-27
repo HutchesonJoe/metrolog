@@ -6,9 +6,6 @@ import { BuildingsContext } from '../BuildingsInfo';
 const MapContainer = () => {
   const buildings = useContext(BuildingsContext)
   
-  console.log(buildings)
-
-  
   const[ selected, setSelected ] = useState({})
   const[ locations, setLocations ] = useState([])
   
@@ -35,7 +32,7 @@ const MapContainer = () => {
 
   const mapStyles = {        
     height: "100vh",
-    width: "100%"};
+    width: "50%"};
   
   const defaultCenter = {
     lat: 40.7812, lng: -73.9665
@@ -50,9 +47,9 @@ const MapContainer = () => {
           center={defaultCenter}>
             {
             locations.map(building=>{
-              console.log(building)
+              
               return(
-                <Marker key={building.id} position={building.location} onClick={()=>onSelect(building)}/>
+                <Marker id={building.id} key={building.id} position={building.location} onClick={()=>onSelect(building)}/>
               )
             })
             }{

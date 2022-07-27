@@ -57,7 +57,7 @@ useEffect(()=>{
       
       <Routes>
         <Route exact path="/home" element={<Home/>}/>
-        <Route exact path="/complaintsbybuilding" element={<ComplaintsByBuilding/>}/>
+        {/* <Route exact path="/complaintsbybuilding" element={<ComplaintsByBuilding/>}/> */}
         <Route path="/allcomplaints" element={<AllSuperComplaints complaints={complaints} setComplaints={setComplaints}/>}/>
         <Route path="/super/complaintsbybuilding" element={<SuperComplaintsByBuilding />}/>
         

@@ -1,7 +1,7 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 // import { UserContext } from "../UserContext"
 import ComplaintCard from "../Cards/ComplaintCard"
-import { TenantComplaintContext} from "../TenantComplaintsContext"
+import { TenantComplaintContext } from "../TenantComplaintsContext"
 
 function BuildingComplaints(){
   

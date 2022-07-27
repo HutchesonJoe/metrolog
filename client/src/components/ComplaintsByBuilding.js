@@ -43,16 +43,17 @@ function ComplaintsByBuilding(){
           {buildingList}
         </select>
       </div>
-      <div>
-    
-        <MapContainer/>
-        
-      </div>
+      
       <div id="building-complaints-window">
       {tenantComplaints.map((tenantComplaint)=><ComplaintCard tenantComplaint={tenantComplaint} complaintTypes={complaintTypes} key={tenantComplaint.id}/>)}
       </div>
       <div>
         {noComplaints ? "No complaints in this Building." : ""}
+      </div>
+      <div>
+    
+        <MapContainer/>
+        
       </div>
     </div>
    
