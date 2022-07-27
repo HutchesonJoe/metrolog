@@ -44,8 +44,8 @@ function App() {
           <TenantComplaintProvider>
               <BuildingsProvider>
                 <ComplaintTypesProvider>
-                  <button onClick={()=>setMapOn(!mapOn)}>{mapOn ? "Close map" : "Click to see an interactive map of all properties."}</button>
                   {homeOn ? <Home setHomeOn={setHomeOn} isSuper={isSuper}/>: <Enter setUser={setUser}/>}
+                  <button onClick={()=>setMapOn(!mapOn)}>{mapOn ? "Close map" : "Click to see an interactive map of all properties."}</button>
                   {mapOn ? <ComplaintsByBuilding/> : <div></div>}
                 </ComplaintTypesProvider>
               </BuildingsProvider>
