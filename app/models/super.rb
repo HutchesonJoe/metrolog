@@ -3,8 +3,7 @@ class Super < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :email, :email => true
-  validates :username, presence: true, uniqueness: true, 
-  # validates :password, :length => {:within => 6..12}
+  validates :username, presence: true, uniqueness: true
   
   has_many :buildings
   has_many :apartments, through: :buildings

@@ -6,7 +6,7 @@ class Tenant < ApplicationRecord
   validates :last_name, presence: true
   validates :username, presence: true, uniqueness: true
   validates :email, :email => true  
-  # validates :password, :length => {:within => 6..12}
+  
    
   has_one :apartment
   has_many :tenant_complaints
