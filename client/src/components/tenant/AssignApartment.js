@@ -1,6 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
 import { BuildingsContext } from '../BuildingsInfo';
-import { TenantComplaintContext } from '../TenantComplaintsContext';
 import { UserContext } from '../UserContext';
 import Errors from '../Errors';
 
