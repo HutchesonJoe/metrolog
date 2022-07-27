@@ -4,10 +4,9 @@ import { TenantComplaintContext } from '../TenantComplaintsContext';
 import { UserContext } from '../UserContext';
 import Errors from '../Errors';
 
-function AssignApartment({setApartment}){
+function AssignApartment({setApartment, setComplaints}){
   const buildings = useContext(BuildingsContext)
   const [user, setUser] = useContext(UserContext)
-  const [ complaints, setComplaints ] = useContext(TenantComplaintContext)
   const[building, setBuilding] = useState()
   const[unit, setUnit] = useState()
   const[errors, setErrors] = useState([])
@@ -43,7 +42,7 @@ function AssignApartment({setApartment}){
       } else {
         r.json().then(data=>{
           setApartment(data);
-          setUser(data.tenant)
+          setUser(data.tenant);
         })
       }
       })

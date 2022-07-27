@@ -2,7 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import AssignApartment from "../tenant/AssignApartment";
 import { UserContext } from "../UserContext"
 
-function TenantCard(){
+function TenantCard({setComplaints}){
     const [user] = useContext(UserContext)
     const [apartment, setApartment] = useState()
    
@@ -28,7 +28,7 @@ function TenantCard(){
       )
     } else if(user && !apartment){
       return(
-        <AssignApartment setApartment={setApartment}/>
+        <AssignApartment setApartment={setApartment} setComplaints={setComplaints}/>
       )
     }else {
       return(

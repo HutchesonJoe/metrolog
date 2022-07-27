@@ -16,7 +16,6 @@ import FileComplaint from "./tenant/FileComplaint";
 function Home(){
 
 const [user, setUser] = useContext(UserContext)
-// const []
 const [complaints, setComplaints] = useState([])
 const [isSuper, setIsSuper] = useState()
 
@@ -52,7 +51,7 @@ useEffect(()=>{
     <div id="home">
         <div>
           {user ? <p id="welcome">Welcome, {user.first_name} <button onClick={handleLogout}>Logout</button></p> : ""}
-          {isSuper ? <SuperCard/> : <TenantCard/>}
+          {isSuper ? <SuperCard/> : <TenantCard setComplaints = {setComplaints}/>}
           {isSuper ? <SuperNavbar/> : <TenantNavbar/>}
         </div>
       
