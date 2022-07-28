@@ -1,7 +1,6 @@
 class TenantsController < ApplicationController
   rescue_from ActiveRecord::RecordInvalid, with: :render_invalid_response
-  # rescue_from ActiveRecord::UnprocessableEntity, with: :render_unprocessable
-
+  
   skip_before_action :authorized, only: [:create, :index]
   
   def index

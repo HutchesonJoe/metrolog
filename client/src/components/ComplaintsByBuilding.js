@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext} from "react";
 import ComplaintCard from "./Cards/ComplaintCard";
 import { BuildingsContext } from "./BuildingsInfo";
-// import { Wrapper, Status } from "@googlemaps/react-wrapper"
 import MapContainer from "./map/MapContainer"
 
 function ComplaintsByBuilding(){

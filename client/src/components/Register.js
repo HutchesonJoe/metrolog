@@ -68,12 +68,7 @@ function Register(){
     })
     .then((r) => {
       if (r.ok) {
-        r.json().then((data)=>{
-          // setNewRegistration(false)
-          //am I useing this?
-          // if(isTenant){
-          //   setTenantId(data.id)
-          // }
+        r.json().then(()=>{
           setErrors(["Success! Please log in."])
         });
       }

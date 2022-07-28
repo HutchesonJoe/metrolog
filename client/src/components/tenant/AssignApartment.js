@@ -66,8 +66,3 @@ function AssignApartment({setApartment, setComplaints}){
 }
 
 export default AssignApartment
-
-// function setApartment(){
-//   console.log(tenantId)
- 
-// }

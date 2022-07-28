@@ -2,11 +2,9 @@ import { useState, useContext, useEffect } from "react"
 import { UserContext } from "../UserContext"
 import { ComplaintTypesContext } from "../ComplaintTypesInfo"
 import Errors from "../Errors"
-import { TenantComplaintContext } from "../TenantComplaintsContext"
 
 function FileComplaint({complaints, setComplaints}){
   const [user, setUser] = useContext(UserContext)
-  // const [complaints, setComplaints] = useContext(TenantComplaintContext)
 
   useEffect(()=>{
     fetch("/me").then((r)=>{

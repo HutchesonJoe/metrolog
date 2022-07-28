@@ -6,7 +6,7 @@ const[notes, setNotes] = useState("")
 const[type, setType] = useState(complaint.complaint_type)
 const[typeId, setTypeId] = useState(complaint.complaint_id)
 const complaintTypes = useContext(ComplaintTypesContext)
-// console.log(complaint)
+
 useEffect(()=>{
   if(isSuper){
     if(complaint.super_notes){

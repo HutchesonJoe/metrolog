@@ -1,20 +1,8 @@
-import { useContext, useEffect , useState} from "react";
-import { UserContext } from "../UserContext"
+
 import ComplaintCard from "../Cards/ComplaintCard"
-import { TenantComplaintContext } from "../TenantComplaintsContext"
 
 function BuildingComplaints({complaints, setComplaints}){
   
-  const [user] = useContext(UserContext)
-  // const [ complaints, setComplaints ]= useContext(TenantComplaintContext)
-  
-
-  // useEffect(()=>{
-  //   if(user && user.building){
-  //     setComplaints(user.building.tenant_complaints)
-  //   }
-  // },[complaints])
-
   let tenantBuildingComplaints 
 
   if(complaints){

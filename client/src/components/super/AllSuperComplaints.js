@@ -6,7 +6,6 @@ import { TenantComplaintContext } from "../TenantComplaintsContext"
 
 function AllSuperComplaints({complaints, setComplaints}){
   const [user] = useContext(UserContext)
-  // const [complaints, setComplaints] = useContext(TenantComplaintContext)
   const types = useContext(ComplaintTypesContext)
 
   const [typeId, setTypeId] = useState()

@@ -4,7 +4,6 @@ class SessionsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
   def create
-    # byebug
     if(params[:isSuper])
       session[:is_super] = @is_super
       super_user
@@ -23,7 +22,6 @@ class SessionsController < ApplicationController
     end
   end
 
-#okay that this is in my sessions controller??
   def show
     if session[:is_super]
       user = Super.find_by(id: session[:user_id])

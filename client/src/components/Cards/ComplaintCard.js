@@ -1,7 +1,5 @@
 import { useContext, useState, useEffect } from "react";
-import { ComplaintTypesContext } from "../ComplaintTypesInfo";
 import { BuildingsContext } from "../BuildingsInfo";
-import { TenantComplaintContext } from "../TenantComplaintsContext";
 import { UserContext } from "../UserContext"
 import EditComplaint from "../EditComplaint";
 import Errors from "../Errors"
@@ -20,8 +18,6 @@ function ComplaintCard({tenantComplaint, complaints, setComplaints}){
   const[isSuper, setIsSuper] = useState(false)
   const[compStatus, setCompStatus] = useState()
   
-  // const complaintTypes = useContext(ComplaintTypesContext)
-  // const [complaints, setComplaints] = useContext(TenantComplaintContext)
   const buildings = useContext(BuildingsContext)
   const [user] = useContext(UserContext)
 

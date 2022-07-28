@@ -1,9 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import ComplaintsByBuilding from "./ComplaintsByBuilding";
 import TenantCard from "./Cards/TenantCard";
 import SuperCard from "./Cards/SuperCard";
-import { TenantComplaintContext } from "./TenantComplaintsContext";
 import TenantNavbar from "./navbars/TenantNavbar";
 import SuperNavbar from "./navbars/SuperNavbar";
 import { UserContext } from "./UserContext";
@@ -57,7 +55,6 @@ useEffect(()=>{
       
       <Routes>
         <Route exact path="/home" element={<Home/>}/>
-        {/* <Route exact path="/complaintsbybuilding" element={<ComplaintsByBuilding/>}/> */}
         <Route path="/allcomplaints" element={<AllSuperComplaints complaints={complaints} setComplaints={setComplaints}/>}/>
         <Route path="/super/complaintsbybuilding" element={<SuperComplaintsByBuilding complaints={complaints} setComplaints={setComplaints}/>}/>
         

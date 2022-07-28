@@ -62,12 +62,4 @@ class TenantComplaintsController < ApplicationController
     render json: { errors: invalid.record.errors.full_messages }, status: 422
   end
 
-  
-  # def @timeOpen
-  #   #???
-  #   complaint = Tenant_complaint.find(params[:id])
-
-    
-  # end
-
 end

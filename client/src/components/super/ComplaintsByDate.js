@@ -1,19 +1,7 @@
-import { useState, useEffect, useContext } from "react";
+
 import ComplaintCard from "../Cards/ComplaintCard";
-import { TenantComplaintContext } from "../TenantComplaintsContext"
 
 function ComplaintsByDate({complaints, setComplaints}){
-  // const[complaints, setComplaints] = useContext(TenantComplaintContext)
-  // const[filter, setFilter] = useState("/by-date")
-  console.log(complaints)
-
-  // useEffect(()=>{
-  //   fetch(filter)
-  //   .then(r=>r.json())
-  //   .then((data)=>{
-  //     setComplaints(data);
-  //   })
-  // },[filter])
 
   function filterComplaints(e){
     console.log(e.target.value)
