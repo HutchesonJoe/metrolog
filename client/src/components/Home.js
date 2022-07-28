@@ -1,4 +1,5 @@
 import { useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
 import TenantCard from "./Cards/TenantCard";
 import SuperCard from "./Cards/SuperCard";
@@ -16,6 +17,8 @@ function Home(){
 const [user, setUser] = useContext(UserContext)
 const [complaints, setComplaints] = useState([])
 const [isSuper, setIsSuper] = useState()
+
+const navigate = useNavigate()
 
 useEffect(()=>{
     if(user && user.buildings){
@@ -41,6 +44,7 @@ useEffect(()=>{
     }).then((r)=>{
       if (r.ok){
         setUser(null);
+        navigate("/")
       }
     })
   }

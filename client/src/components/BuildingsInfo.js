@@ -12,7 +12,7 @@ function BuildingsProvider({children}){
 
   },[])
   
-  return <BuildingsContext.Provider value={buildings}>{children}</BuildingsContext.Provider>
+  return <BuildingsContext.Provider value={[buildings, setBuildings]}>{children}</BuildingsContext.Provider>
 }
 
 export  { BuildingsContext, BuildingsProvider }

@@ -4,7 +4,7 @@ import { useState, useContext, useEffect } from "react";
 import { BuildingsContext } from '../BuildingsInfo';
 
 const MapContainer = () => {
-  const buildings = useContext(BuildingsContext)
+  const [buildings] = useContext(BuildingsContext)
   
   const[ selected, setSelected ] = useState({})
   const[ locations, setLocations ] = useState([])

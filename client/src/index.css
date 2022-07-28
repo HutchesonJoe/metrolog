@@ -21,6 +21,10 @@ code {
 
 }
 
+#no-complaints{
+  font-size: large;
+  font-weight: bold;
+}
 
 #logo{
   width: 50%;

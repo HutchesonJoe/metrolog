@@ -4,7 +4,7 @@ import { UserContext } from '../UserContext';
 import Errors from '../Errors';
 
 function AssignApartment({setApartment, setComplaints}){
-  const buildings = useContext(BuildingsContext)
+  const [buildings] = useContext(BuildingsContext)
   const [user, setUser] = useContext(UserContext)
   const[building, setBuilding] = useState()
   const[unit, setUnit] = useState()

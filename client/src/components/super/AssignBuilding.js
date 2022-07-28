@@ -4,7 +4,7 @@ import { UserContext } from "../UserContext";
 
 function AssignBuilding({superBuildings, setSuperBuildings}){
   
-  const buildings = useContext(BuildingsContext)
+  const [buildings, setBuildings] = useContext(BuildingsContext)
   const [user] = useContext(UserContext)
   const [buildingOptions, setBuildingOptions] = useState([])
   const [buildingId, setBuildingId] = useState()
@@ -42,7 +42,11 @@ function AssignBuilding({superBuildings, setSuperBuildings}){
         })
           .then(r=>r.json())
           .then(data=>{
+            const newBuildings = buildings.filter((b)=>b.id!==data.id)
+            newBuildings.push(data)
+            setBuildings(newBuildings)
             setSuperBuildings([...superBuildings, data])
+            
           })
       }
     }

@@ -14,6 +14,7 @@ function SuperComplaintsByBuilding(){
   },[user])
 
   let buildingOptions
+  
   if(superBuildings){
     buildingOptions = superBuildings.map((building)=><option key={building.id} value={building.id}>{building.address}</option>)
   }
@@ -28,7 +29,7 @@ function SuperComplaintsByBuilding(){
   if(building && building.tenant_complaints.length!==0){
     complaintList = building.tenant_complaints.map((complaint)=><ComplaintCard key = {complaint.id} tenantComplaint={complaint}/>)
   } else if (building && building.tenant_complaints.length===0){
-    complaintList = "No complaints in this building."
+    complaintList = <div id="no-complaints">No complaints in this building.</div>
   } 
   
   return(

@@ -11,7 +11,6 @@ class TenantsController < ApplicationController
   def create
     tenant = Tenant.create!(tenant_params)
     render json: tenant, status: :created
-
   end
 
   def show

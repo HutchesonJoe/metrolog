@@ -6,7 +6,6 @@ import Errors from "../Errors"
 
 
 function ComplaintCard({tenantComplaint, complaints, setComplaints}){
-  
   const createdAt = new Date(tenantComplaint.created_at)
   const updatedAt = new Date(tenantComplaint.updated_at)
   const now = new Date()
@@ -18,9 +17,8 @@ function ComplaintCard({tenantComplaint, complaints, setComplaints}){
   const[isSuper, setIsSuper] = useState(false)
   const[compStatus, setCompStatus] = useState()
   
-  const buildings = useContext(BuildingsContext)
+  const [buildings] = useContext(BuildingsContext)
   const [user] = useContext(UserContext)
-
   
   useEffect(()=>{
     setComplaint(tenantComplaint);
@@ -43,7 +41,9 @@ function ComplaintCard({tenantComplaint, complaints, setComplaints}){
     setErrors([])
     if(!user){
       setErrors(["You must be logged in to edit/update/delete complaints."]);
-    } else {
+    } else if(user.apartment && tenantComplaint.tenant_id!==user.id){
+      setErrors(["Only the tenant who filed the complaint can edit the complaint."])
+    }else {
       setEditWindowOn(!editWindowOn)
     }
   }
@@ -55,6 +55,8 @@ function ComplaintCard({tenantComplaint, complaints, setComplaints}){
     } else{
       if(isSuper){
         setErrors(["Only a tenant can delete a complaint."])
+      } else if(tenantComplaint.tenant_id!==user.id){
+        setErrors(["Only the tenant who filed the complaint can delete it."])
       } else {
         const deleteConfirm = window.confirm("Are you sure you want to delete this complaint? You CANNOT undo this action. 'OK' to confirm, or CANCEL.")
         if(deleteConfirm){

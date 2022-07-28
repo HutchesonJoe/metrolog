@@ -5,7 +5,7 @@ import MapContainer from "./map/MapContainer"
 
 function ComplaintsByBuilding(){
 
-  const buildings = useContext(BuildingsContext)
+  const [buildings] = useContext(BuildingsContext)
   
   const[tenantComplaints, setTenantComplaints] = useState([])
   const[complaintTypes, setComplaintTypes] = useState([])

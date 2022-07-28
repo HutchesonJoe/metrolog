@@ -63,13 +63,11 @@ function AllSuperComplaints({complaints, setComplaints}){
         <option>Select</option>
         {complaintTypesOptions}
       </select>
-      </div>
-      <div>
-      <label >Show open complaints only</label>
+      <label>  Show open complaints only</label>
       <input type="checkbox" name="open/close" onChange={()=>setOpenOnly(!openOnly)}/>
       </div>
       {complaintList}
-      <div>
+      <div id="no-complaints">
         {complaintList[0] ? "" : "No complaints of this type in this building."}
       </div>
     </div>

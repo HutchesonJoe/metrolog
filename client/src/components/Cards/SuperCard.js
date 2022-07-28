@@ -39,7 +39,7 @@ function SuperCard(){
     
     <div id="tenant-super-card">
       <h4>Super Information:</h4>
-      <p>{user.first_name} {user.last_name}</p>
+      <h3>{user.first_name} {user.last_name}</h3>
       <p>{user.email}, {user.phone_number}</p>
       <p>Your buildings:</p>
       <ul>
