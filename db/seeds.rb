@@ -13,7 +13,7 @@ sonia = Tenant.create(first_name: "Sonia", last_name: "Marquez", email: "sonia@m
 tony = Super.create(first_name: "Antonio", last_name: "Banderas", email: "Abanderas@gmail.com", phone_number: "777-777-7777", username: "tony", password: "tony", password_confirmation: "tony")
 ramone = Super.create(first_name: "Ramone", last_name: "Olivas", email: "rolivas@gmail.com", phone_number: "222-222-2222", username: "ramone", password: "ramone", password_confirmation: "ramone")
 alan = Super.create(first_name: "Alan", last_name: "Smith", email: "asmith@yomama.com", phone_number: "765-656-8989", username: "alan", password: "alan", password_confirmation: "alan")
-noSuper = Super.create(first_name: "nosuper", last_name: "nosuper", password: "nosuper", password_confirmation: "nosuper", username: "nosuper", email: "nsuper@gmail.com", phone_number: "none")
+noSuper = Super.create(first_name: "nosuper", last_name: "nosuper", email: "joehutcheson@gmail.com", phone_number: "none", username: "nosuper", password: "nosuper", password_confirmation: "nosuper")
 
 #complaints
 
