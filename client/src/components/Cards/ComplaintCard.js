@@ -96,7 +96,7 @@ function ComplaintCard({tenantComplaint, complaints, setComplaints}){
           <button onClick={handleDelete}>Delete Complaint</button>
         </div>
         <div id="edit-window">
-          {editWindowOn ? <EditComplaint complaintId={tenantComplaint.id} complaint={complaint} setComplaint={setComplaint} setComplaints={setComplaints} isSuper={isSuper} setIsSuper={setIsSuper}/> : ""}
+          {editWindowOn ? <EditComplaint complaintId={tenantComplaint.id} complaint={complaint} setComplaint={setComplaint} setComplaints={setComplaints} isSuper={isSuper} setIsSuper={setIsSuper} setEditWindowOn={setEditWindowOn}/> : ""}
         </div>
         <div>
           <Errors errors={errors}/>

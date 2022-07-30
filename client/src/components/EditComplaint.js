@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { ComplaintTypesContext } from "./ComplaintTypesInfo"
 
-function EditComplaint({complaintId, complaint, setComplaint, isSuper}){
+function EditComplaint({complaintId, complaint, setComplaint, isSuper, setEditWindowOn}){
 const[notes, setNotes] = useState("")
 const[type, setType] = useState(complaint.complaint_type)
 const[typeId, setTypeId] = useState(complaint.complaint_id)
@@ -32,7 +32,6 @@ if(isSuper){
 }
 
 
-
 const complaintTypeOptions = complaintTypes.map((type)=><option key={type.id} value={type.id}>{type.complaint_type}</option>)
 
 function handleSelect(e){
@@ -55,6 +54,7 @@ function handleSubmit(e){
   .then(r=>r.json())
   .then((data)=>{
     setComplaint(data);
+    setEditWindowOn(false)
   })
   
 }

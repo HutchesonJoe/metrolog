@@ -2,7 +2,6 @@ import { useEffect, useState, useContext } from "react";
 import { ComplaintTypesContext } from "../ComplaintTypesInfo"
 import ComplaintCard from "../Cards/ComplaintCard";
 import { UserContext } from "../UserContext";
-import { TenantComplaintContext } from "../TenantComplaintsContext"
 
 function AllSuperComplaints({complaints, setComplaints}){
   const [user] = useContext(UserContext)

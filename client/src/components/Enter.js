@@ -5,7 +5,7 @@ function Enter({setUser}){
  return(
     <div>
       <Login setUser={setUser}/>
-      <Register/>
+      <Register setUser={setUser}/>
     </div>
  )
 }

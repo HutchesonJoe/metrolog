@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Errors from './Errors';
 
-function Register(){
+function Register({setUser}){
   const[isTenant, setIsTenant] = useState(true)
   const[formOn, setFormOn] = useState(false)
   const[errors, setErrors] = useState()
@@ -68,8 +68,8 @@ function Register(){
     })
     .then((r) => {
       if (r.ok) {
-        r.json().then(()=>{
-          setErrors(["Success! Please log in."])
+        r.json().then((data)=>{
+          setUser(data)
         });
       }
       if (!r.ok) {
